@@ -19,23 +19,23 @@ export default function LogoConceptsPage() {
     <div className="pb-32 pt-36">
       <header className="container-content max-w-3xl">
         <p className="text-eyebrow uppercase tracking-[0.18em] text-gold-400">
-          Internal review · round two · not indexed
+          Internal review · decided · not indexed
         </p>
         <h1 className="mt-6 text-h1 font-semibold text-ink-50">
-          The wordmark, <span className="accent-word">six ways</span>
+          Gold Bars, <span className="accent-word">selected</span>
         </h1>
 
         <div className="mt-8 space-y-5 text-lead text-ink-300">
           <p>
-            The rule running through the name is gone. Worth knowing why it looked
-            wrong: it wasn&rsquo;t only decoration — it was doubling as the crossbar of
-            the H. So the eye read a word being struck through <em>and</em> a letter
-            missing a piece of itself, at the same time.
+            <strong className="text-ink-50">Gold Bars is the identity.</strong> It&rsquo;s
+            live across the site, and the full brand kit — logo files in five colour
+            schemes, app icon, favicon and social card — is exported to{" "}
+            <code className="text-ink-300">public/brand/</code>. Usage rules are in{" "}
+            <code className="text-ink-300">BRAND.md</code>.
           </p>
           <p>
-            The letterforms have been rebuilt so the H carries its own bar. Below
-            are six ways to accent the same drawing, plus five symbol marks
-            underneath — two of them new.
+            Everything else considered is kept below for reference. Switching is a
+            one-line change if you ever want to revisit it.
           </p>
         </div>
 

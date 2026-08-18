@@ -155,10 +155,10 @@ export function WordmarkCompact({
   // The N, plus whatever accent that variant is built around.
   const accents: Record<WordmarkVariantId, Stroke[]> = {
     "wordmark-clean": [],
-    "wordmark-bars": [{ d: "M14 32 H50", gold: true }],
-    "wordmark-underline": [{ d: "M8 52 H56", gold: true, width: 3 }],
+    "wordmark-bars": [{ d: "M12 30 H44", gold: true }],
+    "wordmark-underline": [{ d: "M10 54 H46", gold: true, width: 3 }],
     "wordmark-initial": [],
-    "wordmark-shield": [{ d: "M24 30 L32 22 L40 30", gold: true, width: 3 }],
+    "wordmark-shield": [{ d: "M18 33 L28 25 L38 33", gold: true }],
     "wordmark-split": [],
   };
 
