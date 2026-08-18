@@ -3,6 +3,9 @@ import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { Loader, LOADER_BOOT_SCRIPT } from "@/components/Loader";
 import { ScrollManager } from "@/components/ScrollManager";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { Ava } from "@/components/chat/Ava";
+import { OrganizationSchema } from "@/components/Schema";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -19,7 +22,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     // Preserved from his live site — this is his existing SEO footprint.
-    default: `Insurance & Financial Services | ${site.legalName.toUpperCase()}`,
+    default: "Insurance & Financial Services | NAAHAZ INC",
     template: `%s | ${site.name}`,
   },
   description: site.description,
@@ -39,7 +42,7 @@ export const metadata: Metadata = {
     locale: site.locale,
     url: site.url,
     siteName: site.name,
-    title: `Insurance & Financial Services | ${site.legalName.toUpperCase()}`,
+    title: "Insurance & Financial Services | NAAHAZ INC",
     description: site.description,
   },
   twitter: { card: "summary_large_image" },
@@ -77,7 +80,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div id="naahaz-content">
           <SiteHeader />
           <main id="main">{children}</main>
+          <SiteFooter />
         </div>
+
+        <Ava />
+        <OrganizationSchema />
       </body>
     </html>
   );
