@@ -1,53 +1,73 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
-import type { LogoConceptId } from "@/lib/brand";
 import { MARKS } from "./marks";
+import { Wordmark, WordmarkCompact } from "./wordmark";
+import { ACTIVE_LOGO } from "./active";
 
-/**
- * The concept currently wired into the live site.
- *
- * Phase 1 ships all four for review — change this one line once the concept
- * is chosen and the header, loader, and favicon all follow.
- */
-export const ACTIVE_CONCEPT: LogoConceptId = "monogram";
+export { ACTIVE_LOGO };
 
 type LockupVariant = "mark" | "primary" | "full";
 
-const SIZES: Record<LockupVariant, { mark: number; name: string; sub: string }> = {
-  mark:    { mark: 34, name: "",           sub: "" },
-  primary: { mark: 32, name: "text-[1.05rem]", sub: "" },
-  full:    { mark: 40, name: "text-[1.15rem]", sub: "text-[0.6rem]" },
-};
-
+/**
+ * The logo lockup.
+ *
+ * A wordmark identity and a symbol identity need different lockups — the
+ * wordmark IS the name, so it doesn't get set text beside it, while a symbol
+ * always does. This component resolves that from ACTIVE_LOGO so no page has
+ * to know which kind is currently live.
+ */
 export function Logo({
   variant = "primary",
-  concept = ACTIVE_CONCEPT,
   className = "",
 }: {
   variant?: LockupVariant;
-  concept?: LogoConceptId;
   className?: string;
 }) {
-  const Mark = MARKS[concept];
-  const s = SIZES[variant];
+  if (ACTIVE_LOGO.kind === "wordmark") {
+    if (variant === "mark") {
+      return (
+        <WordmarkCompact
+          variant={ACTIVE_LOGO.id}
+          className={`h-9 w-9 ${className}`}
+          stroke="currentColor"
+        />
+      );
+    }
+
+    return (
+      <span className={`inline-flex flex-col ${className}`}>
+        <Wordmark
+          variant={ACTIVE_LOGO.id}
+          stroke="currentColor"
+          className={variant === "full" ? "w-44" : "w-36"}
+        />
+        {variant === "full" && (
+          <span className="mt-2.5 pl-0.5 text-[0.6rem] tracking-[0.42em] text-ink-500">
+            INSURANCE
+          </span>
+        )}
+      </span>
+    );
+  }
+
+  const Mark = MARKS[ACTIVE_LOGO.id];
+  const size = variant === "full" ? 40 : 32;
 
   return (
     <span className={`inline-flex items-center gap-3 ${className}`}>
       <Mark
-        style={{ width: s.mark, height: s.mark }}
+        style={{ width: size, height: size }}
         stroke="currentColor"
         accent="var(--color-gold-500)"
         className="shrink-0"
       />
       {variant !== "mark" && (
         <span className="flex flex-col leading-none">
-          <span
-            className={`${s.name} font-semibold tracking-[0.2em] text-ink-50`}
-          >
+          <span className={`${variant === "full" ? "text-[1.15rem]" : "text-[1.05rem]"} font-semibold tracking-[0.2em] text-ink-50`}>
             NAAHAZ
           </span>
           {variant === "full" && (
-            <span className={`${s.sub} mt-1.5 tracking-[0.32em] text-ink-500`}>
+            <span className="mt-1.5 text-[0.6rem] tracking-[0.32em] text-ink-500">
               INSURANCE
             </span>
           )}

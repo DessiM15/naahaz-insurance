@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { LogoLink } from "@/components/logo/Logo";
 import { site } from "@/lib/site";
+import { BookingModal } from "@/components/booking/BookingModal";
 
 /**
  * Sticky header. Transparent over the hero, then settles into a blurred navy
@@ -22,6 +23,7 @@ const NAV = [
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [booking, setBooking] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -71,12 +73,13 @@ export function SiteHeader() {
               {site.contact.phonePrimary}
             </a>
 
-            <Link
-              href="/book"
+            <button
+              type="button"
+              onClick={() => setBooking(true)}
               className="hidden items-center rounded-full bg-gold-500 px-6 text-[0.9rem] font-semibold tracking-wide text-navy-950 transition-all duration-300 hover:bg-gold-400 hover:shadow-[0_0_32px_-6px_var(--color-gold-500)] sm:inline-flex"
             >
               Book a Strategy Call
-            </Link>
+            </button>
 
             <button
               type="button"
@@ -145,13 +148,13 @@ export function SiteHeader() {
                 transition={{ delay: 0.36, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="mt-8 flex flex-col gap-3"
               >
-                <Link
-                  href="/book"
-                  onClick={() => setOpen(false)}
+                <button
+                  type="button"
+                  onClick={() => { setOpen(false); setBooking(true); }}
                   className="inline-flex items-center justify-center rounded-full bg-gold-500 px-7 font-semibold text-navy-950"
                 >
                   Book a Strategy Call
-                </Link>
+                </button>
                 <a
                   href={`tel:${site.contact.phonePrimary.replace(/\D/g, "")}`}
                   className="inline-flex items-center justify-center rounded-full border border-navy-600 px-7 text-ink-300"
@@ -163,6 +166,8 @@ export function SiteHeader() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <BookingModal open={booking} onClose={() => setBooking(false)} />
     </>
   );
 }

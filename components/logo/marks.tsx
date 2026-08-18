@@ -1,5 +1,5 @@
 import type { SVGProps } from "react";
-import type { LogoConceptId } from "@/lib/brand";
+import type { MarkId } from "@/lib/brand";
 
 /**
  * All four marks are built as *strokes*, not fills.
@@ -66,53 +66,7 @@ export function MonogramMark({ stroke = "currentColor", accent = "#C9A227", ...p
 }
 
 /* -------------------------------------------------------------------------
-   3 — The Wordmark
-   Monoline geometric letterforms. The H's crossbar breaks out of the letter
-   and runs the full width of the name as a gold rule.
-   ------------------------------------------------------------------------- */
-export function WordmarkMark({ stroke = "currentColor", accent = "#C9A227", ...props }: MarkProps) {
-  // Letter box 28 wide, 40 tall, advancing every 38 units.
-  const x = (i: number) => i * 38 + 4;
-  const N = (i: number) => `M${x(i)} 44 V4 M${x(i)} 4 L${x(i) + 28} 44 M${x(i) + 28} 44 V4`;
-  const A = (i: number) => `M${x(i)} 44 L${x(i) + 14} 4 L${x(i) + 28} 44`;
-  const Abar = (i: number) => `M${x(i) + 7} 29 H${x(i) + 21}`;
-  const Hstems = (i: number) => `M${x(i)} 44 V4 M${x(i) + 28} 44 V4`;
-  const Z = (i: number) => `M${x(i)} 4 H${x(i) + 28} L${x(i)} 44 H${x(i) + 28}`;
-
-  return (
-    <svg viewBox="0 0 236 52" role="img" aria-hidden {...props}>
-      <g {...base}>
-        <path d={N(0)} stroke={stroke} />
-        <path d={A(1)} stroke={stroke} />
-        <path d={Abar(1)} stroke={stroke} />
-        <path d={A(2)} stroke={stroke} />
-        <path d={Abar(2)} stroke={stroke} />
-        <path d={Hstems(3)} stroke={stroke} />
-        <path d={A(4)} stroke={stroke} />
-        <path d={Abar(4)} stroke={stroke} />
-        <path d={Z(5)} stroke={stroke} />
-        {/* The detail: the H crossbar, extended edge to edge in gold. */}
-        <path d="M4 24 H232" stroke={accent} strokeWidth={3} />
-      </g>
-    </svg>
-  );
-}
-
-/** Compact mark for the wordmark concept — favicon and tight mobile nav. */
-export function WordmarkCompactMark({ stroke = "currentColor", accent = "#C9A227", ...props }: MarkProps) {
-  return (
-    <svg viewBox="0 0 64 60" role="img" aria-hidden {...props}>
-      <g {...base}>
-        <path d="M8 48 V12 M8 12 L34 48 M34 48 V12" stroke={stroke} />
-        <path d="M4 30 H60" stroke={accent} strokeWidth={3} />
-        <path d="M42 48 L56 12" stroke={stroke} opacity={0.35} />
-      </g>
-    </svg>
-  );
-}
-
-/* -------------------------------------------------------------------------
-   4 — The Ascent
+   3 — The Ascent
    A doubled chevron. Shelter from above, and upward motion — protection and
    growth in a single form.
    ------------------------------------------------------------------------- */
@@ -127,19 +81,95 @@ export function AscendMark({ stroke = "currentColor", accent = "#C9A227", ...pro
   );
 }
 
+
+/* -------------------------------------------------------------------------
+   4 — The Keystone
+   An arch with its keystone set in gold. The oldest structural idea there is
+   for something built to hold weight and stay standing.
+   ------------------------------------------------------------------------- */
+export function KeystoneMark({ stroke = "currentColor", accent = "#C9A227", ...props }: MarkProps) {
+  return (
+    <svg viewBox="0 0 64 60" role="img" aria-hidden {...props}>
+      <g {...base}>
+        <path d="M7 55 V29 A25 25 0 0 1 57 29 V55" stroke={stroke} />
+        <path d="M25 8.5 L39 8.5 L42 20 L22 20 Z" stroke={accent} />
+      </g>
+    </svg>
+  );
+}
+
+/* -------------------------------------------------------------------------
+   5 — One Line
+   N and A drawn as a single unbroken stroke — up, down, up, down. One
+   continuous line for two names. It also animates better than anything else
+   here, since the whole mark is one path.
+   ------------------------------------------------------------------------- */
+export function OneLineMark({ stroke = "currentColor", accent = "#C9A227", ...props }: MarkProps) {
+  return (
+    <svg viewBox="0 0 70 60" role="img" aria-hidden {...props}>
+      <g {...base}>
+        <path d="M6 54 V6 L36 54 V6 L64 54" stroke={stroke} />
+        <path d="M36 40 H56" stroke={accent} />
+      </g>
+    </svg>
+  );
+}
+
 /* ------------------------------------------------------------------------- */
 
-export const MARKS: Record<LogoConceptId, (p: MarkProps) => React.ReactElement> = {
+export const MARKS: Record<MarkId, (p: MarkProps) => React.ReactElement> = {
   shield: ShieldMark,
   monogram: MonogramMark,
-  wordmark: WordmarkCompactMark,
   ascend: AscendMark,
+  keystone: KeystoneMark,
+  oneline: OneLineMark,
 };
 
-/** Full-width form of a concept — the wordmark concept differs from its mark. */
-export const FULL_MARKS: Record<LogoConceptId, (p: MarkProps) => React.ReactElement> = {
-  shield: ShieldMark,
-  monogram: MonogramMark,
-  wordmark: WordmarkMark,
-  ascend: AscendMark,
+/**
+ * The same marks as path data, so the loading screen can animate each stroke
+ * on. Kept immediately beside the components above so the two cannot drift.
+ */
+export const MARK_GEOMETRY: Record<
+  MarkId,
+  { viewBox: string; strokes: { d: string; gold?: boolean; width?: number }[] }
+> = {
+  monogram: {
+    viewBox: "0 0 68 60",
+    strokes: [
+      { d: "M6 54 V6" },
+      { d: "M6 6 L34 54" },
+      { d: "M34 54 V6" },
+      { d: "M34 6 L62 54" },
+      { d: "M34 38 H52", gold: true },
+    ],
+  },
+  oneline: {
+    viewBox: "0 0 70 60",
+    strokes: [
+      { d: "M6 54 V6 L36 54 V6 L64 54" },
+      { d: "M36 40 H56", gold: true },
+    ],
+  },
+  keystone: {
+    viewBox: "0 0 64 60",
+    strokes: [
+      { d: "M7 55 V29 A25 25 0 0 1 57 29 V55" },
+      { d: "M25 8.5 L39 8.5 L42 20 L22 20 Z", gold: true },
+    ],
+  },
+  ascend: {
+    viewBox: "0 0 64 60",
+    strokes: [
+      { d: "M4 52 L32 8 L60 52" },
+      { d: "M17 52 L32 29 L47 52", gold: true },
+    ],
+  },
+  shield: {
+    viewBox: "0 0 64 68",
+    strokes: [
+      { d: "M32 3 L60 13.5 V35 C60 50 47.5 60 32 65 C16.5 60 4 50 4 35 V13.5 Z" },
+      { d: "M19 30 L32 39 L45 30", gold: true },
+      { d: "M19 41 L32 50 L45 41", gold: true },
+    ],
+  },
 };

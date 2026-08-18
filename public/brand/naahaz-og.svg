@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+    <rect width="1200" height="630" fill="#0A1628"/>
+    <rect y="626" width="1200" height="4" fill="#C9A227"/>
+    <g transform="translate(249.7 250) scale(3.1)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 44 V4 M4 4 L32 44 M32 44 V4" fill="none" stroke="#F4F6FA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M42 44 L56 4 L70 44" fill="none" stroke="#F4F6FA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M49 26 H63" fill="none" stroke="#C9A227" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M80 44 L94 4 L108 44" fill="none" stroke="#F4F6FA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M87 26 H101" fill="none" stroke="#C9A227" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M118 44 V4 M146 44 V4" fill="none" stroke="#F4F6FA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M118 26 H146" fill="none" stroke="#C9A227" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M156 44 L170 4 L184 44" fill="none" stroke="#F4F6FA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M163 26 H177" fill="none" stroke="#C9A227" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M194 4 H222 L194 44 H222" fill="none" stroke="#F4F6FA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="600" y="410" text-anchor="middle" fill="#8FA0B8"
+      font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" letter-spacing="10">PROTECTING WHAT MATTERS</text>
+    <text x="600" y="470" text-anchor="middle" fill="#C9A227"
+      font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19" letter-spacing="4">ROLLING MEADOWS, ILLINOIS</text>
+</svg>
