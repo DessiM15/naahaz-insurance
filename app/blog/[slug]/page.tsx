@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { Photo } from "@/components/media/Photo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { POSTS, getPost, formatDate } from "@/lib/blog";
@@ -96,7 +96,7 @@ export default async function BlogPost({
         <Reveal>
           <div className="container-content">
             <div className="relative aspect-21/9 overflow-hidden rounded-3xl border border-navy-700">
-              <Image
+              <Photo
                 src={post.image}
                 alt={post.imageAlt}
                 fill
@@ -145,7 +145,7 @@ export default async function BlogPost({
                 className="group flex gap-5 rounded-2xl border border-navy-700 p-5 transition-colors duration-500 hover:border-gold-500/50"
               >
                 <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-xl">
-                  <Image src={p.image} alt="" fill sizes="128px" className="object-cover" />
+                  <Photo src={p.image} alt="" fill sizes="128px" className="object-cover" />
                 </div>
                 <div>
                   <span className="text-[0.75rem] text-gold-400">{p.tag}</span>

@@ -23,6 +23,9 @@ export type Service = {
   lede: string;
   image: string;
   imageAlt: string;
+  /** Secondary image, used beside the "Is this you?" section. */
+  detailImage: string;
+  detailAlt: string;
   intro: string;
   offerings: { title: string; body: string; verbatim?: boolean }[];
   whoFor: string[];
@@ -46,6 +49,8 @@ export const SERVICES: Service[] = [
     lede: "Retirement planning goes beyond just saving — it's about creating a roadmap that ensures long-term financial stability and the ability to enjoy life after work.",
     image: "/images/services/retirement-planning.jpg",
     imageAlt: "A sailboat on open water at golden hour",
+    detailImage: "/images/detail/retirement-planning.jpg",
+    detailAlt: "A couple walking hand in hand along a woodland path",
     intro:
       "Most people arrive with a number in mind and no plan attached to it. We start the other way around: what you want retirement to look like, what it will actually cost, and what has to be true for the money to last. Then we build toward it.",
     offerings: [
@@ -107,6 +112,8 @@ export const SERVICES: Service[] = [
     lede: "Effective retirement income planning is essential for ensuring a secure and comfortable future through strategic asset and income management.",
     image: "/images/services/income-strategies.jpg",
     imageAlt: "A person in a grey coat standing composed and at ease",
+    detailImage: "/images/detail/income-strategies.jpg",
+    detailAlt: "Two people going through documents together at a table",
     intro:
       "Accumulating money and spending it down are different problems requiring different tools. The strategy that grew your savings is rarely the strategy that should distribute them. This is the part of the plan most people have never had built for them.",
     offerings: [
@@ -162,6 +169,8 @@ export const SERVICES: Service[] = [
     lede: "Navigating Medicare can be challenging, but we're here to help you make informed decisions with confidence.",
     image: "/images/services/medicare.jpg",
     imageAlt: "An older woman with a warm, composed expression",
+    detailImage: "/images/detail/medicare.jpg",
+    detailAlt: "A doctor talking with a patient in a consulting room",
     intro:
       "Medicare has more moving parts than it needs to, and the enrollment deadlines are unforgiving. We sit down with you, work out what you actually need based on your doctors and your prescriptions, and handle the paperwork.",
     offerings: [
@@ -224,6 +233,8 @@ export const SERVICES: Service[] = [
     lede: "Coverage that replaces your income, clears your debts, and gives the people who depend on you room to grieve without also worrying about money.",
     image: "/images/services/life-insurance.jpg",
     imageAlt: "A father and his daughters looking out over a view together",
+    detailImage: "/images/detail/life-insurance.jpg",
+    detailAlt: "A parent holding a young child",
     intro:
       "Life insurance is a promise you make to people who won't be in the room when it's kept. Getting the amount and the structure right matters more than the premium — and for many families it does double duty as an estate planning tool.",
     offerings: [
@@ -282,6 +293,8 @@ export const SERVICES: Service[] = [
     lede: "Roughly seven in ten people over 65 will need some form of long-term care. Medicare doesn't cover it, and it is the single largest uninsured risk in most retirement plans.",
     image: "/images/services/long-term-care.jpg",
     imageAlt: "An older person's hand holding a younger person's hand",
+    detailImage: "/images/detail/long-term-care.jpg",
+    detailAlt: "A nurse smiling with an older patient at home",
     intro:
       "This is the conversation people put off, and the one that most often undoes an otherwise sound retirement. Care costs are paid out of savings until the savings are gone. Planning for it early is dramatically cheaper than planning for it late.",
     offerings: [
@@ -340,6 +353,8 @@ export const SERVICES: Service[] = [
     lede: "Individual and family health plans through the ACA marketplace — including the subsidies most people don't realise they qualify for.",
     image: "/images/services/health-insurance.jpg",
     imageAlt: "A family together outdoors in an open field",
+    detailImage: "/images/detail/health-insurance.jpg",
+    detailAlt: "A healthcare worker going through information with a patient",
     intro:
       "Marketplace plans are genuinely hard to compare, and the differences that matter — whether your doctor is in network, whether your prescriptions are covered, what happens after the deductible — aren't the ones the website leads with. We compare on the things that will actually affect you.",
     offerings: [
@@ -394,6 +409,8 @@ export const SERVICES: Service[] = [
     lede: "Coverage for the business itself, the people who run it, and the ones who'd have to keep it going without you.",
     image: "/images/services/business-insurance.jpg",
     imageAlt: "A small business owner behind the counter, greeting a customer",
+    detailImage: "/images/detail/business-insurance.jpg",
+    detailAlt: "Hand tools arranged on a workshop rack",
     intro:
       "Most small businesses are underinsured in one direction and overinsured in another, because coverage got added piece by piece as the business grew. We look at the whole picture and tell you where the actual exposure is.",
     offerings: [
@@ -448,6 +465,8 @@ export const SERVICES: Service[] = [
     lede: "Home, auto and umbrella coverage — reviewed as a set, because that's where the gaps and the discounts both hide.",
     image: "/images/services/property-casualty.jpg",
     imageAlt: "A suburban home with a covered porch and mature trees",
+    detailImage: "/images/detail/property-casualty.jpg",
+    detailAlt: "A car parked on the driveway of a family home",
     intro:
       "These are the policies people buy once and never look at again, which is exactly why they drift out of line with reality. Home values change, teenagers start driving, and liability limits set a decade ago stop being adequate.",
     offerings: [
@@ -502,6 +521,8 @@ export const SERVICES: Service[] = [
     lede: "Trip cancellation, medical emergencies and evacuation coverage — including the international medical gap Medicare leaves wide open.",
     image: "/images/services/travel-insurance.jpg",
     imageAlt: "Clouds seen through an aircraft window in daylight",
+    detailImage: "/images/detail/travel-insurance.jpg",
+    detailAlt: "A passport and boarding pass resting on a travel bag",
     intro:
       "Most travellers assume their health plan follows them abroad. Very often it doesn't, and Medicare almost never does. For retirees travelling internationally this is the single most overlooked coverage gap we see.",
     offerings: [

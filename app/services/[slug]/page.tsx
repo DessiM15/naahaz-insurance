@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { Photo } from "@/components/media/Photo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SERVICES, getService } from "@/content/services";
@@ -133,26 +133,39 @@ export default async function ServicePage({
       <section className="grain relative overflow-hidden py-28" aria-labelledby="whofor-heading">
         <div className="absolute inset-0 bg-navy-800/40" aria-hidden />
         <div className="grain-layer" aria-hidden />
-        <div className="container-content relative grid gap-14 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.4fr)] lg:gap-20">
-          <Reveal>
-            <Eyebrow>Is this you?</Eyebrow>
-            <h2 id="whofor-heading" className="mt-7 text-h2 font-semibold text-ink-50">
-              Worth a <span className="accent-word">conversation</span> if
-            </h2>
-          </Reveal>
+        <div className="container-content relative grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+          <div>
+            <Reveal>
+              <Eyebrow>Is this you?</Eyebrow>
+              <h2 id="whofor-heading" className="mt-7 text-h2 font-semibold text-ink-50">
+                Worth a <span className="accent-word">conversation</span> if
+              </h2>
+            </Reveal>
 
-          <ul className="space-y-5">
-            {service.whoFor.map((w, i) => (
-              <Reveal as="li" key={w} delay={i * 0.06}>
-                <div className="flex gap-4">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="mt-1 shrink-0" aria-hidden>
-                    <path d="M4 12.5l5 5L20 7" stroke="var(--color-gold-500)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <span className="text-lead text-ink-200">{w}</span>
-                </div>
-              </Reveal>
-            ))}
-          </ul>
+            <ul className="mt-10 space-y-5">
+              {service.whoFor.map((w, i) => (
+                <Reveal as="li" key={w} delay={i * 0.06}>
+                  <div className="flex gap-4">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="mt-1 shrink-0" aria-hidden>
+                      <path d="M4 12.5l5 5L20 7" stroke="var(--color-gold-500)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span className="text-lead text-ink-200">{w}</span>
+                  </div>
+                </Reveal>
+              ))}
+            </ul>
+          </div>
+
+          <Reveal delay={0.14}>
+            <div className="relative aspect-4/5 overflow-hidden rounded-3xl border border-navy-700 sm:aspect-4/3 lg:aspect-4/5">
+              <Duotone
+                src={service.detailImage}
+                alt={service.detailAlt}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                intensity={0.85}
+              />
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -174,7 +187,7 @@ export default async function ServicePage({
                 href={`/services/${r.slug}`}
                 className="group relative flex min-h-40 flex-col justify-end overflow-hidden rounded-2xl border border-navy-700 p-6 transition-colors duration-500 hover:border-gold-500/50"
               >
-                <Image
+                <Photo
                   src={r.image}
                   alt=""
                   fill

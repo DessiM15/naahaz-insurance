@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { Photo } from "@/components/media/Photo";
 import { Reveal, RevealLines } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SERVICES_SORTED } from "@/content/services";
@@ -35,7 +35,7 @@ export function ServicesGrid({
               href={`/services/${s.slug}`}
               className="group relative flex h-full min-h-72 flex-col justify-end overflow-hidden rounded-2xl border border-navy-700 p-7 transition-colors duration-500 hover:border-gold-500/50"
             >
-              <Image
+              <Photo
                 src={s.image}
                 alt=""
                 fill

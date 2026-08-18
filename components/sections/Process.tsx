@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Photo } from "@/components/media/Photo";
 import { Reveal, RevealLines } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ButtonLink } from "@/components/ui/Button";
@@ -24,7 +24,7 @@ const STEPS = [
 export function Process() {
   return (
     <section className="grain relative overflow-hidden py-32" aria-labelledby="process-heading">
-      <Image
+      <Photo
         src="/images/sections/process.jpg"
         alt=""
         fill

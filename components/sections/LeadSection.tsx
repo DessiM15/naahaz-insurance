@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Photo } from "@/components/media/Photo";
 import { Reveal } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { LeadWizard } from "@/components/leads/LeadWizard";
@@ -21,7 +21,7 @@ export function LeadSection({
 }) {
   return (
     <section id="enquire" className="grain relative overflow-hidden py-32" aria-labelledby="lead-heading">
-      <Image src={image} alt="" fill sizes="100vw" className="object-cover opacity-[0.12]" />
+      <Photo src={image} alt="" fill sizes="100vw" className="object-cover opacity-[0.12]" />
       <div className="absolute inset-0 bg-gradient-to-b from-navy-900 via-navy-950/92 to-navy-900" aria-hidden />
       <div className="grain-layer" aria-hidden />
 

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Photo } from "@/components/media/Photo";
 import { Reveal, RevealLines } from "@/components/ui/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
 import { site } from "@/lib/site";
@@ -14,7 +14,7 @@ export function CtaBand({
 }) {
   return (
     <section className="grain relative overflow-hidden py-32" aria-labelledby="cta-heading">
-      <Image src={image} alt="" fill sizes="100vw" className="object-cover opacity-30" />
+      <Photo src={image} alt="" fill sizes="100vw" className="object-cover opacity-30" />
       <div className="absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-950/88 to-navy-900/70" aria-hidden />
       <div className="mesh-drift absolute inset-0 opacity-60" aria-hidden />
       <div className="grain-layer" aria-hidden />
