@@ -1,4 +1,5 @@
-import Image from "next/image";
+import { Photo } from "@/components/media/Photo";
+import { Duotone } from "@/components/media/Duotone";
 import { Hero } from "@/components/sections/Hero";
 import { Process } from "@/components/sections/Process";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
@@ -26,6 +27,16 @@ export default function HomePage() {
               className="mt-7 text-h2 font-semibold text-ink-50"
               lines={["Independent, and", <>on <span className="accent-word">your side</span></>]}
             />
+            <Reveal delay={0.16}>
+              <div className="relative mt-12 hidden aspect-4/5 overflow-hidden rounded-3xl border border-navy-700 lg:block">
+                <Duotone
+                  src="/images/sections/mission.jpg"
+                  alt="An older adult and a child walking together along a path"
+                  sizes="(max-width: 1024px) 0px, 40vw"
+                  intensity={0.9}
+                />
+              </div>
+            </Reveal>
           </div>
 
           <div className="lg:pt-3">
@@ -58,7 +69,7 @@ export default function HomePage() {
 
       {/* ------------------------------------------------------ Testimonials */}
       <section className="grain relative overflow-hidden py-32" aria-labelledby="voices-heading">
-        <Image
+        <Photo
           src="/images/sections/testimonial.jpg"
           alt=""
           fill

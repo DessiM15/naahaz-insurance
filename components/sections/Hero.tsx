@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { Duotone } from "@/components/media/Duotone";
+import Image from "next/image";
+import { DuotoneOverlays } from "@/components/media/DuotoneOverlays";
 import { site } from "@/lib/site";
 import heroImage from "@/public/images/hero/horizon-couple.jpg";
 
@@ -47,12 +48,18 @@ export function Hero() {
     >
       {/* --- Layer 1: photograph ------------------------------------------ */}
       <motion.div style={{ y: imageY, scale: imageScale }} className="absolute inset-0">
-        <Duotone
-          src={heroImage}
-          alt="An older couple sitting together on a headland, looking out across the water"
-          priority
-          sizes="100vw"
-        />
+        <div className="absolute inset-0 overflow-hidden">
+          <Image
+            src={heroImage}
+            alt="An older couple sitting together on a headland, looking out across the water"
+            fill
+            priority
+            placeholder="blur"
+            sizes="100vw"
+            className="object-cover"
+          />
+          <DuotoneOverlays />
+        </div>
       </motion.div>
 
       {/* --- Layer 2: scrims + mesh --------------------------------------- */}

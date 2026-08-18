@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { Photo } from "@/components/media/Photo";
 import Link from "next/link";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -24,7 +24,7 @@ export default function ServicesPage() {
 
       {/* Hub hero */}
       <section className="grain relative flex min-h-[62svh] items-end overflow-hidden pb-20 pt-40">
-        <Image
+        <Photo
           src="/images/services/hub.jpg"
           alt=""
           fill
@@ -78,6 +78,32 @@ export default function ServicesPage() {
             </ul>
           </div>
         </Reveal>
+      </section>
+
+      {/* Band — a breath between the catalogue and the resources */}
+      <section className="grain relative mt-20 overflow-hidden py-28" aria-labelledby="band-heading">
+        <Photo
+          src="/images/sections/hub-band.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-30"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/85 to-navy-950/45" aria-hidden />
+        <div className="grain-layer" aria-hidden />
+
+        <div className="container-content relative">
+          <Reveal>
+            <h2 id="band-heading" className="max-w-2xl text-h2 font-semibold text-ink-50">
+              One agency for all of it &mdash; and{" "}
+              <span className="accent-word">one person</span> who knows the whole picture
+            </h2>
+            <p className="mt-7 max-w-xl text-lead text-ink-300">
+              Most people end up with coverage scattered across four companies and
+              nobody looking at how the pieces fit. That&rsquo;s where the gaps live.
+            </p>
+          </Reveal>
+        </div>
       </section>
 
       {/* Resources — where the legacy /videos page now lives */}

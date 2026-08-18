@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { Photo } from "@/components/media/Photo";
 import { Reveal, RevealLines } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Duotone } from "@/components/media/Duotone";
@@ -55,6 +55,17 @@ export default function AboutPage() {
 
       {/* --------------------------------------------------------- The name */}
       <section className="container-content py-28" aria-labelledby="name-heading">
+        <Reveal>
+          <div className="relative mb-20 aspect-21/9 overflow-hidden rounded-3xl border border-navy-700">
+            <Duotone
+              src="/images/about/generations.jpg"
+              alt="An adult and a child standing together at the shoreline"
+              sizes="100vw"
+              intensity={0.85}
+            />
+          </div>
+        </Reveal>
+
         <div className="grid gap-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] lg:gap-20">
           <Reveal>
             <Eyebrow>Where the name comes from</Eyebrow>
@@ -154,6 +165,19 @@ export default function AboutPage() {
               </Reveal>
             ))}
           </div>
+
+          <Reveal delay={0.24}>
+            <div className="relative mt-16 aspect-21/9 overflow-hidden rounded-3xl border border-navy-700">
+              <Photo
+                src="/images/about/office.jpg"
+                alt="A quiet meeting room with natural light"
+                fill
+                sizes="100vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-navy-900/45 mix-blend-multiply" aria-hidden />
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -181,7 +205,7 @@ export default function AboutPage() {
 
           <Reveal delay={0.12}>
             <div className="relative aspect-4/3 overflow-hidden rounded-2xl border border-navy-700">
-              <Image
+              <Photo
                 src="/images/about/chicago.jpg"
                 alt="Chicago architecture against a bright sky"
                 fill

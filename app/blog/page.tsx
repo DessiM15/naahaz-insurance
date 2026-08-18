@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { Photo } from "@/components/media/Photo";
 import Link from "next/link";
 import { POSTS, formatDate } from "@/lib/blog";
 import { Reveal, RevealLines } from "@/components/ui/Reveal";
@@ -35,6 +35,21 @@ export default function BlogIndex() {
             The questions clients ask us most, written out properly.
           </p>
         </Reveal>
+
+        <Reveal delay={0.26}>
+          <div className="relative mt-14 aspect-21/9 overflow-hidden rounded-3xl border border-navy-700">
+            <Photo
+              src="/images/blog/index-hero.jpg"
+              alt="A notebook and laptop on a quiet desk"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-navy-900/35 mix-blend-multiply" aria-hidden />
+            <div className="absolute inset-0 bg-gradient-to-t from-navy-950/70 to-transparent" aria-hidden />
+          </div>
+        </Reveal>
       </section>
 
       {/* Lead post */}
@@ -46,7 +61,7 @@ export default function BlogIndex() {
               className="group relative grid overflow-hidden rounded-3xl border border-navy-700 transition-colors duration-500 hover:border-gold-500/50 lg:grid-cols-2"
             >
               <div className="relative aspect-16/10 lg:aspect-auto lg:min-h-80">
-                <Image
+                <Photo
                   src={lead.image}
                   alt={lead.imageAlt}
                   fill
@@ -88,7 +103,7 @@ export default function BlogIndex() {
                 className="group flex h-full flex-col overflow-hidden rounded-2xl border border-navy-700 transition-colors duration-500 hover:border-gold-500/50"
               >
                 <div className="relative aspect-16/9">
-                  <Image
+                  <Photo
                     src={p.image}
                     alt={p.imageAlt}
                     fill
