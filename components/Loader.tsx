@@ -2,8 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { FULL_MARKS } from "@/components/logo/marks";
-import { ACTIVE_CONCEPT } from "@/components/logo/Logo";
+import { ACTIVE_LOGO, activeGeometry } from "@/components/logo/active";
 import { site } from "@/lib/site";
 
 /**
@@ -56,7 +55,8 @@ export function Loader() {
 
   if (done) return null;
 
-  const Mark = FULL_MARKS[ACTIVE_CONCEPT];
+  const geometry = activeGeometry();
+  const isWordmark = ACTIVE_LOGO.kind === "wordmark";
 
   if (reduced) {
     return (
@@ -66,7 +66,23 @@ export function Loader() {
         className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-950 transition-opacity duration-200"
         aria-hidden
       >
-        <Mark style={{ width: 88, height: 88 }} stroke="var(--color-ink-50)" accent="var(--color-gold-500)" />
+        <svg
+          viewBox={geometry.viewBox}
+          className={isWordmark ? "w-[min(70vw,340px)]" : "w-[88px]"}
+          aria-hidden
+        >
+          {geometry.strokes.map((s, i) => (
+            <path
+              key={i}
+              d={s.d}
+              fill="none"
+              strokeWidth={4}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              stroke={s.gold ? "var(--color-gold-500)" : "var(--color-ink-50)"}
+            />
+          ))}
+        </svg>
       </div>
     );
   }
@@ -95,8 +111,8 @@ export function Loader() {
         transition={{ delay: 1.24, duration: 0.28, ease: "easeIn" }}
       >
         <motion.svg
-          viewBox={ACTIVE_CONCEPT === "wordmark" ? "0 0 236 52" : "0 0 68 60"}
-          className={ACTIVE_CONCEPT === "wordmark" ? "w-[min(70vw,380px)]" : "w-[min(28vw,110px)]"}
+          viewBox={geometry.viewBox}
+          className={isWordmark ? "w-[min(74vw,400px)]" : "w-[min(28vw,110px)]"}
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -104,6 +120,7 @@ export function Loader() {
           <MarkPaths />
         </motion.svg>
 
+        {!isWordmark && (
         <div className="flex overflow-hidden" aria-hidden>
           {WORDMARK.map((letter, i) => (
             <motion.span
@@ -121,6 +138,7 @@ export function Loader() {
             </motion.span>
           ))}
         </div>
+        )}
 
         <motion.span
           className="text-[0.7rem] tracking-[0.3em] text-ink-500 uppercase"
@@ -136,63 +154,35 @@ export function Loader() {
 }
 
 /**
- * The active mark, re-declared as animated paths so each stroke can draw
- * itself on. Kept in sync with components/logo/marks.tsx.
+ * The active logo, drawn on stroke by stroke. Reads its geometry from
+ * components/logo/active.ts, so picking a different logo changes the loading
+ * animation with it — there is no second copy of the paths to update.
  */
 function MarkPaths() {
-  const common = {
-    fill: "none",
-    strokeWidth: 4,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-  };
+  const { strokes } = activeGeometry();
 
-  const draw = (i: number) => ({
-    initial: { pathLength: 0, opacity: 0 },
-    animate: { pathLength: 1, opacity: 1 },
-    transition: {
-      pathLength: { delay: 0.15 + i * 0.13, duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
-      opacity: { delay: 0.15 + i * 0.13, duration: 0.15 },
-    },
-  });
-
-  const PATHS: Record<string, { d: string; gold?: boolean }[]> = {
-    monogram: [
-      { d: "M6 54 V6" },
-      { d: "M6 6 L34 54" },
-      { d: "M34 54 V6" },
-      { d: "M34 6 L62 54" },
-      { d: "M34 38 H52", gold: true },
-    ],
-    shield: [
-      { d: "M32 3 L60 13.5 V35 C60 50 47.5 60 32 65 C16.5 60 4 50 4 35 V13.5 Z" },
-      { d: "M19 30 L32 39 L45 30", gold: true },
-      { d: "M19 41 L32 50 L45 41", gold: true },
-    ],
-    ascend: [
-      { d: "M4 52 L32 8 L60 52" },
-      { d: "M17 52 L32 29 L47 52", gold: true },
-    ],
-    wordmark: [
-      { d: "M4 44 V4 M4 4 L32 44 M32 44 V4" },
-      { d: "M42 44 L56 4 L70 44 M49 29 H63" },
-      { d: "M80 44 L94 4 L108 44 M87 29 H101" },
-      { d: "M118 44 V4 M146 44 V4" },
-      { d: "M156 44 L170 4 L184 44 M163 29 H177" },
-      { d: "M194 4 H222 L194 44 H222" },
-      { d: "M4 24 H232", gold: true },
-    ],
-  };
+  // Spread the draw across a fixed window regardless of how many strokes the
+  // chosen logo has — the clean wordmark has ten, the one-line mark has two.
+  const window = 0.62;
+  const step = strokes.length > 1 ? window / (strokes.length - 1) : 0;
 
   return (
     <g>
-      {PATHS[ACTIVE_CONCEPT].map((p, i) => (
+      {strokes.map((s, i) => (
         <motion.path
           key={i}
-          d={p.d}
-          {...common}
-          stroke={p.gold ? "var(--color-gold-500)" : "var(--color-ink-50)"}
-          {...draw(i)}
+          d={s.d}
+          fill="none"
+          strokeWidth={s.width ?? 4}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          stroke={s.gold ? "var(--color-gold-500)" : "var(--color-ink-50)"}
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{
+            pathLength: { delay: 0.15 + i * step, duration: 0.55, ease: [0.16, 1, 0.3, 1] },
+            opacity: { delay: 0.15 + i * step, duration: 0.12 },
+          }}
         />
       ))}
     </g>
