@@ -19,10 +19,30 @@
   --color-ink-500: #8FA0B8;   /* muted text — AA on navy-900 */
 
   /* --- Gold ------------------------------------------------------------- */
-  --color-gold-600: #A8871F;  /* AA-safe gold on light surfaces */
+  --color-gold-700: #7A6416;  /* AA for SMALL text on paper (5.22:1) */
+  --color-gold-600: #A8871F;  /* AA for LARGE text on paper (3.11:1) only */
   --color-gold-500: #C9A227;  /* accent */
   --color-gold-400: #E3C766;  /* accent-2, hover */
   --color-gold-200: #F2E3B0;
+
+  /* --- Paper -------------------------------------------------------------
+     Light reading surfaces. Warm rather than white: pure white glares, and a
+     paper tone sits far better beside gold.
+
+     Gold does NOT survive as small text here. Measured against paper-50:
+       gold-500  2.20:1  fails even as large text
+       gold-600  3.11:1  large text only
+       gold-700  5.22:1  passes, but is 39% darker than the brand gold and
+                         reads as olive next to a gold button
+     So on paper, gold is a *material* — button fills, rules, logo bars, and
+     large headline accents. Small labels and links use slate and navy.
+     ---------------------------------------------------------------------- */
+  --color-paper-50:  #F7F4ED;  /* reading surface */
+  --color-paper-100: #FFFFFF;  /* raised cards on paper */
+  --color-paper-200: #EFEBE1;  /* subtle fills */
+  --color-paper-300: #E4DDD0;  /* hairlines */
+  --color-slate-700: #14202F;  /* body text on paper — 14.97:1 */
+  --color-slate-500: #5B6B80;  /* muted text on paper — 4.95:1 */
 
   /* --- Type ------------------------------------------------------------- */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
@@ -201,4 +221,39 @@ html[data-loader="play"] #naahaz-content {
 
 @media (prefers-reduced-motion: reduce) {
   html[data-loader="play"] #naahaz-content { animation: none; }
+}
+
+
+/* ==========================================================================
+   Paper surfaces
+   Light reading sections. See the token block above for why gold changes
+   role here rather than changing shade.
+   ========================================================================== */
+
+@utility surface-paper {
+  background: var(--color-paper-50);
+  color: var(--color-slate-700);
+}
+
+@utility rule-paper {
+  border-top: 1px solid var(--color-paper-300);
+}
+
+/* The italic serif accent word, on paper. Only ever used at headline sizes,
+   where gold-600 clears AA for large text. */
+@utility accent-word-paper {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--color-gold-600);
+  letter-spacing: -0.01em;
+}
+
+/* Selection needs inverting on light surfaces or it disappears. */
+.surface-paper ::selection {
+  background: var(--color-navy-900);
+  color: var(--color-paper-50);
+}
+
+.surface-paper :focus-visible {
+  outline-color: var(--color-gold-700);
 }

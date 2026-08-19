@@ -1,5 +1,6 @@
 import Image, { type StaticImageData } from "next/image";
 import { DuotoneOverlays } from "./DuotoneOverlays";
+import type { Tone } from "@/components/ui/tone";
 import { BLUR_MAP } from "@/lib/blur-map";
 
 /**
@@ -16,6 +17,7 @@ export function Duotone({
   className = "",
   intensity = 1,
   sizes = "100vw",
+  surface = "dark",
 }: {
   src: StaticImageData | string;
   alt: string;
@@ -24,6 +26,8 @@ export function Duotone({
   /** 0 = untreated photograph, 1 = full brand duotone. */
   intensity?: number;
   sizes?: string;
+  /** Which surface the image sits on — the treatment differs. */
+  surface?: Tone;
 }) {
   // Static imports carry their own placeholder; path-based ones need the map.
   const blur = typeof src === "string" ? BLUR_MAP[src] : undefined;
@@ -43,7 +47,7 @@ export function Duotone({
             ? { placeholder: "blur" as const, blurDataURL: blur }
             : {})}
       />
-      <DuotoneOverlays intensity={intensity} />
+      <DuotoneOverlays intensity={intensity} surface={surface} />
     </div>
   );
 }
