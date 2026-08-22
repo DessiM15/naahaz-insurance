@@ -18,26 +18,26 @@ export default function BlogIndex() {
   const [lead, ...rest] = POSTS;
 
   return (
-    <>
+    <div className="bs-paper">
       <BreadcrumbSchema trail={[{ name: "Home", href: "/" }, { name: "News & Resources", href: "/blog" }]} />
 
       <section className="container-content pb-16 pt-40">
         <Reveal>
-          <Eyebrow>News &amp; Press</Eyebrow>
+          <Eyebrow surface="paper">News &amp; Press</Eyebrow>
         </Reveal>
         <RevealLines
             as="h1"
-          className="mt-8 max-w-3xl text-h1 font-semibold text-ink-50"
-          lines={["Straight answers,", <>no <span className="accent-word">jargon</span></>]}
+          className="mt-8 max-w-3xl text-h1 font-semibold text-slate-700"
+          lines={["Straight answers,", <>no <span className="accent-word-paper">jargon</span></>]}
         />
         <Reveal delay={0.18}>
-          <p className="mt-8 max-w-2xl text-lead text-ink-300">
+          <p className="mt-8 max-w-2xl text-lead text-slate-700/85">
             The questions clients ask us most, written out properly.
           </p>
         </Reveal>
 
         <Reveal delay={0.26}>
-          <div className="relative mt-14 aspect-21/9 overflow-hidden rounded-3xl border border-navy-700">
+          <div className="relative mt-14 aspect-21/9 overflow-hidden border border-paper-300">
             <Photo
               src="/images/blog/index-hero.jpg"
               alt="A notebook and laptop on a quiet desk"
@@ -58,7 +58,7 @@ export default function BlogIndex() {
           <Reveal>
             <Link
               href={`/blog/${lead.slug}`}
-              className="group relative grid overflow-hidden rounded-3xl border border-navy-700 transition-colors duration-500 hover:border-gold-500/50 lg:grid-cols-2"
+              className="group relative grid overflow-hidden border border-paper-300 bg-paper-100 transition-colors duration-500 hover:border-gold-600/60 lg:grid-cols-2"
             >
               <div className="relative aspect-16/10 lg:aspect-auto lg:min-h-80">
                 <Photo
@@ -74,14 +74,14 @@ export default function BlogIndex() {
 
               <div className="flex flex-col justify-center p-8 sm:p-12">
                 <div className="flex items-center gap-3 text-[0.8rem]">
-                  <span className="rounded-full bg-gold-500/12 px-3 py-1 text-gold-400">{lead.tag}</span>
-                  <time dateTime={lead.published} className="text-ink-500">
+                  <span className="border border-paper-300 bg-paper-200 px-3 py-1 uppercase tracking-[0.14em] text-slate-700">{lead.tag}</span>
+                  <time dateTime={lead.published} className="text-slate-500">
                     {formatDate(lead.published)}
                   </time>
                 </div>
-                <h2 className="mt-6 text-h2 font-semibold text-ink-50">{lead.title}</h2>
-                <p className="mt-5 text-ink-300">{lead.description}</p>
-                <span className="mt-7 inline-flex items-center gap-2 text-[0.9rem] font-medium text-gold-400">
+                <h2 className="mt-6 text-h2 font-semibold text-slate-700">{lead.title}</h2>
+                <p className="mt-5 text-slate-700/85">{lead.description}</p>
+                <span className="mt-7 inline-flex items-center gap-2 text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-slate-700">
                   Read the article
                   <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden className="transition-transform duration-400 group-hover:translate-x-1">
                     <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
@@ -100,7 +100,7 @@ export default function BlogIndex() {
             <Reveal key={p.slug} delay={i * 0.08}>
               <Link
                 href={`/blog/${p.slug}`}
-                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-navy-700 transition-colors duration-500 hover:border-gold-500/50"
+                className="group flex h-full flex-col overflow-hidden border border-paper-300 bg-paper-100 transition-colors duration-500 hover:border-gold-600/60"
               >
                 <div className="relative aspect-16/9">
                   <Photo
@@ -114,13 +114,13 @@ export default function BlogIndex() {
                 </div>
                 <div className="flex flex-1 flex-col p-7">
                   <div className="flex items-center gap-3 text-[0.78rem]">
-                    <span className="rounded-full bg-gold-500/12 px-3 py-1 text-gold-400">{p.tag}</span>
-                    <time dateTime={p.published} className="text-ink-500">
+                    <span className="border border-paper-300 bg-paper-200 px-3 py-1 uppercase tracking-[0.14em] text-slate-700">{p.tag}</span>
+                    <time dateTime={p.published} className="text-slate-500">
                       {formatDate(p.published)}
                     </time>
                   </div>
-                  <h2 className="mt-5 text-h3 font-semibold text-ink-50">{p.title}</h2>
-                  <p className="mt-4 flex-1 text-[0.95rem] text-ink-300">{p.description}</p>
+                  <h2 className="mt-5 text-h3 font-semibold text-slate-700">{p.title}</h2>
+                  <p className="mt-4 flex-1 text-[0.95rem] text-slate-700/85">{p.description}</p>
                 </div>
               </Link>
             </Reveal>
@@ -131,6 +131,6 @@ export default function BlogIndex() {
       </section>
 
       <CtaBand />
-    </>
+    </div>
   );
 }

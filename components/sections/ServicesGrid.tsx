@@ -18,12 +18,12 @@ export function ServicesGrid({
       {heading && (
         <div className="max-w-2xl">
           <Reveal>
-            <Eyebrow>What we do</Eyebrow>
+            <Eyebrow surface="paper">What we do</Eyebrow>
           </Reveal>
           <RevealLines
             id="services-heading"
-            className="mt-7 text-h2 font-semibold text-ink-50"
-            lines={["Coverage for every", <>stage of <span className="accent-word">your life</span></>]}
+            className="mt-7 text-h2 font-semibold text-slate-700"
+            lines={["Coverage for every", <>stage of <span className="accent-word-paper">your life</span></>]}
           />
         </div>
       )}
@@ -33,7 +33,7 @@ export function ServicesGrid({
           <Reveal key={s.slug} delay={(i % 3) * 0.08}>
             <Link
               href={`/services/${s.slug}`}
-              className="group relative flex h-full min-h-72 flex-col justify-end overflow-hidden rounded-2xl border border-navy-700 p-7 transition-colors duration-500 hover:border-gold-500/50"
+              className="group relative flex h-full min-h-72 flex-col justify-end overflow-hidden border border-paper-300 p-7 transition-colors duration-500 hover:border-gold-600/60"
             >
               <Photo
                 src={s.image}
@@ -42,7 +42,7 @@ export function ServicesGrid({
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="object-cover opacity-35 transition-all duration-700 group-hover:scale-105 group-hover:opacity-50"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/75 to-navy-950/25" aria-hidden />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0e1b2e] via-[#0e1b2e]/75 to-[#0e1b2e]/25" aria-hidden />
 
               <div className="relative">
                 <h3 className="text-h3 font-semibold text-ink-50">{s.name}</h3>

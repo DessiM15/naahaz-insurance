@@ -45,8 +45,16 @@
   --color-slate-500: #5B6B80;  /* muted text on paper — 4.95:1 */
 
   /* --- Type ------------------------------------------------------------- */
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  /* The Broadsheet pair. Swapping the mapping here rather than at every call
+     site converts the whole site's typography in one place: anything using
+     font-sans, font-serif, the text-h* scale or the accent-word utility
+     follows automatically.
+
+     The concept routes are unaffected — they set --c-font-display and
+     --c-font-text to the raw font variables directly, so The Institution keeps
+     Instrument Serif and Geist. Both are still loaded for exactly that reason. */
+  --font-sans: var(--font-mulish), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   /* Fluid display scale. Accessible floor: body never below 17px. */

@@ -66,9 +66,8 @@ export default async function ServicePage({
       {/* ------------------------------------------------------------ Hero */}
       <section className="grain relative flex min-h-[72svh] items-end overflow-hidden pb-24 pt-40">
         <Duotone src={service.image} alt={service.imageAlt} priority sizes="100vw" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/78 to-navy-950/35" aria-hidden />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-950/80 to-transparent" aria-hidden />
-        <div className="mesh-drift absolute inset-0 opacity-50" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0e1b2e] via-[#0e1b2e]/78 to-[#0e1b2e]/35" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0e1b2e]/80 to-transparent" aria-hidden />
 
         <div className="container-content relative">
           <Reveal>
@@ -103,7 +102,7 @@ export default async function ServicePage({
         reading, and it is hardest for exactly the 50-70 audience this page
         is written for.
       */}
-      <div className="surface-paper">
+      <div className="bs-paper">
       {/* ----------------------------------------------------------- Intro */}
       <section className="container-content py-28">
         <div className="grid gap-14 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.4fr)] lg:gap-20">
@@ -165,7 +164,7 @@ export default async function ServicePage({
           </div>
 
           <Reveal delay={0.14}>
-            <div className="relative aspect-4/5 overflow-hidden rounded-3xl border border-paper-300 sm:aspect-4/3 lg:aspect-4/5">
+            <div className="relative aspect-4/5 overflow-hidden border border-paper-300 sm:aspect-4/3 lg:aspect-4/5">
               <Duotone
                 src={service.detailImage}
                 alt={service.detailAlt}
@@ -194,7 +193,7 @@ export default async function ServicePage({
             <Reveal key={r.slug} delay={i * 0.07}>
               <Link
                 href={`/services/${r.slug}`}
-                className="group relative flex min-h-40 flex-col justify-end overflow-hidden rounded-2xl border border-paper-300 p-6 transition-colors duration-500 hover:border-gold-600/50"
+                className="group relative flex min-h-40 flex-col justify-end overflow-hidden border border-paper-300 p-6 transition-colors duration-500 hover:border-gold-600/60"
               >
                 <Photo
                   src={r.image}
@@ -203,7 +202,7 @@ export default async function ServicePage({
                   sizes="(max-width: 640px) 100vw, 33vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/92 via-navy-950/55 to-navy-950/20" aria-hidden />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0e1b2e]/92 via-[#0e1b2e]/55 to-[#0e1b2e]/20" aria-hidden />
                 <span className="relative font-medium text-ink-50">{r.name}</span>
               </Link>
             </Reveal>

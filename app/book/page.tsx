@@ -27,7 +27,7 @@ export default function BookPage() {
 
       <section className="grain relative overflow-hidden pb-28 pt-40">
         <Image src="/images/sections/book.jpg" alt="" fill sizes="100vw" className="object-cover opacity-[0.12]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-900 via-navy-950/92 to-navy-900" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0e1b2e] via-[#0a1424]/95 to-[#0e1b2e]" aria-hidden />
         <div className="grain-layer" aria-hidden />
 
         <div className="container-content relative grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
@@ -84,7 +84,7 @@ export default function BookPage() {
               then the native flow below is fully working, not a placeholder.
             */}
             {embed ? (
-              <div className="overflow-hidden rounded-3xl border border-navy-700 bg-navy-800/60">
+              <div className="overflow-hidden border border-ink-50/15 bg-white/5">
                 <iframe
                   title="Booking calendar"
                   src={embed}

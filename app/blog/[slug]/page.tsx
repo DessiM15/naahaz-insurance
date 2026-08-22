@@ -52,7 +52,7 @@ export default async function BlogPost({
   const others = POSTS.filter((p) => p.slug !== post.slug);
 
   return (
-    <>
+    <div className="bs-paper">
       <BreadcrumbSchema
         trail={[
           { name: "Home", href: "/" },
@@ -73,29 +73,29 @@ export default async function BlogPost({
         <header className="container-content pb-12 pt-40">
           <Reveal>
             <nav aria-label="Breadcrumb" className="mb-8">
-              <ol className="flex items-center gap-2 text-[0.85rem] text-ink-500">
-                <li><Link href="/" className="inline-link hover:text-gold-400">Home</Link></li>
+              <ol className="flex items-center gap-2 text-[0.85rem] text-slate-500">
+                <li><Link href="/" className="inline-link underline decoration-gold-600/40 underline-offset-4 hover:decoration-gold-600">Home</Link></li>
                 <li aria-hidden>/</li>
-                <li><Link href="/blog" className="inline-link hover:text-gold-400">News &amp; Resources</Link></li>
+                <li><Link href="/blog" className="inline-link underline decoration-gold-600/40 underline-offset-4 hover:decoration-gold-600">News &amp; Resources</Link></li>
               </ol>
             </nav>
 
             <div className="flex items-center gap-3 text-[0.82rem]">
-              <span className="rounded-full bg-gold-500/12 px-3 py-1 text-gold-400">{post.tag}</span>
-              <time dateTime={post.published} className="text-ink-500">
+              <span className="border border-paper-300 bg-paper-200 px-3 py-1 uppercase tracking-[0.14em] text-slate-700">{post.tag}</span>
+              <time dateTime={post.published} className="text-slate-500">
                 {formatDate(post.published)}
               </time>
             </div>
 
-            <h1 className="mt-7 max-w-4xl text-h1 font-semibold text-ink-50">{post.title}</h1>
-            <p className="mt-7 max-w-2xl text-lead text-ink-300">{post.description}</p>
+            <h1 className="mt-7 max-w-4xl text-h1 font-semibold text-slate-700">{post.title}</h1>
+            <p className="mt-7 max-w-2xl text-lead text-slate-700/85">{post.description}</p>
           </Reveal>
         </header>
 
         {/* Cover */}
         <Reveal>
           <div className="container-content">
-            <div className="relative aspect-21/9 overflow-hidden rounded-3xl border border-navy-700">
+            <div className="relative aspect-21/9 overflow-hidden border border-paper-300">
               <Photo
                 src={post.image}
                 alt={post.imageAlt}
@@ -114,17 +114,17 @@ export default async function BlogPost({
           <div className="mx-auto max-w-2xl py-20 text-lg">
             <Content />
 
-            <div className="rule-hairline mt-16 pt-8">
-              <p className="text-[0.8rem] leading-relaxed text-ink-500">{disclaimers.advice}</p>
+            <div className="rule-paper mt-16 pt-8">
+              <p className="text-[0.8rem] leading-relaxed text-slate-500">{disclaimers.advice}</p>
             </div>
 
             {service && (
-              <div className="mt-12 rounded-2xl border border-navy-700 bg-navy-800/50 p-8">
-                <p className="text-eyebrow uppercase tracking-[0.18em] text-ink-500">Related service</p>
-                <h2 className="mt-4 text-h3 font-semibold text-ink-50">{service.name}</h2>
-                <p className="mt-3 text-ink-300">{service.lede}</p>
+              <div className="mt-12 border border-paper-300 bg-paper-100 p-8">
+                <p className="text-eyebrow uppercase tracking-[0.18em] text-slate-500">Related service</p>
+                <h2 className="mt-4 text-h3 font-semibold text-slate-700">{service.name}</h2>
+                <p className="mt-3 text-slate-700/85">{service.lede}</p>
                 <div className="mt-7">
-                  <ButtonLink href={`/services/${service.slug}`} variant="ghost" arrow>
+                  <ButtonLink href={`/services/${service.slug}`} variant="ghost-paper" arrow>
                     Learn more
                   </ButtonLink>
                 </div>
@@ -136,20 +136,20 @@ export default async function BlogPost({
 
       {/* More */}
       <section className="container-content pb-20" aria-labelledby="more-heading">
-        <h2 id="more-heading" className="text-h3 font-semibold text-ink-50">Keep reading</h2>
+        <h2 id="more-heading" className="text-h3 font-semibold text-slate-700">Keep reading</h2>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           {others.map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.08}>
               <Link
                 href={`/blog/${p.slug}`}
-                className="group flex gap-5 rounded-2xl border border-navy-700 p-5 transition-colors duration-500 hover:border-gold-500/50"
+                className="group flex gap-5 border border-paper-300 bg-paper-100 p-5 transition-colors duration-500 hover:border-gold-600/60"
               >
-                <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-xl">
+                <div className="relative h-24 w-32 shrink-0 overflow-hidden">
                   <Photo src={p.image} alt="" fill sizes="128px" className="object-cover" />
                 </div>
                 <div>
-                  <span className="text-[0.75rem] text-gold-400">{p.tag}</span>
-                  <h3 className="mt-1.5 font-medium text-ink-50">{p.title}</h3>
+                  <span className="text-[0.72rem] uppercase tracking-[0.14em] text-slate-500">{p.tag}</span>
+                  <h3 className="mt-1.5 font-medium text-slate-700">{p.title}</h3>
                 </div>
               </Link>
             </Reveal>
@@ -158,6 +158,6 @@ export default async function BlogPost({
       </section>
 
       <CtaBand />
-    </>
+    </div>
   );
 }

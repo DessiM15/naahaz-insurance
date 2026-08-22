@@ -15,7 +15,7 @@ export function CtaBand({
   return (
     <section className="grain relative overflow-hidden py-32" aria-labelledby="cta-heading">
       <Photo src={image} alt="" fill sizes="100vw" className="object-cover opacity-30" />
-      <div className="absolute inset-0 bg-gradient-to-br from-navy-950 via-navy-950/88 to-navy-900/70" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0e1b2e] via-[#0e1b2e]/88 to-[#0e1b2e]/70" aria-hidden />
       <div className="mesh-drift absolute inset-0 opacity-60" aria-hidden />
       <div className="grain-layer" aria-hidden />
 
@@ -35,7 +35,7 @@ export function CtaBand({
             </ButtonLink>
             <a
               href={`tel:${site.contact.phonePrimary.replace(/\D/g, "")}`}
-              className="inline-flex items-center justify-center rounded-full border border-navy-600 bg-navy-900/40 px-8 text-base font-medium text-ink-50 backdrop-blur-sm transition-all duration-300 hover:border-gold-500/60"
+              className="inline-flex items-center justify-center border border-ink-50/35 px-8 py-4 text-[0.74rem] font-semibold uppercase tracking-[0.18em] text-ink-50 transition-all duration-300 hover:border-gold-500"
             >
               {site.contact.phonePrimary}
             </a>
