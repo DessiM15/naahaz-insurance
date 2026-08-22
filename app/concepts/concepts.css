@@ -1,0 +1,380 @@
+/* ==========================================================================
+   CONCEPT WORLDS
+   Four homepage directions for NAAHAZ INSURANCE.
+
+   Navy and gold are the through-line in all four, per the client brief. What
+   changes between them is the ground, the supporting tone and the type, so
+   the client picks a world without the brand shifting underneath him.
+
+   Every palette below carries the same seven roles, so a section written for
+   one concept is legible in any of them. Anything concept-specific lives in
+   that concept's own file, not here.
+   ========================================================================== */
+
+[data-concept] {
+  color-scheme: light;
+
+  /* Roles every concept must define. */
+  --c-ground: #ffffff;      /* page background */
+  --c-tint: #f0f0f0;        /* second ground, for alternating sections */
+  --c-card: #ffffff;        /* raised surface */
+  --c-deep: #0a1628;        /* third ground: the dark block */
+  --c-ink: #14202f;         /* body text on ground */
+  --c-ink-soft: #5b6b80;    /* secondary text on ground */
+  --c-on-deep: #f4f6fa;     /* text on the dark block */
+  --c-on-deep-soft: #9fb0c6;
+  --c-accent: #c9a227;      /* gold */
+  --c-accent-deep: #7a6416; /* gold that passes AA as small text on ground */
+  --c-hairline: #e2ddd2;
+
+  background: var(--c-ground);
+  color: var(--c-ink);
+  font-family: var(--c-font-text);
+}
+
+/* The page background must reach past the wrapper, or overscroll shows the
+   navy body colour from the main site. */
+body:has([data-concept]) {
+  background: var(--c-ground-body, #ffffff);
+}
+
+/* --------------------------------------------------------------- Broadsheet
+   Warm bone ground, navy ink, antique gold. Editorial newspaper.
+   Closest relative of the reference site the client's advisor graded highest.
+   -------------------------------------------------------------------------- */
+[data-concept="broadsheet"] {
+  --c-ground: #f7f4ed;
+  --c-ground-body: #f7f4ed;
+  --c-tint: #ece5d6;
+  --c-card: #fffdf8;
+  --c-deep: #0e1b2e;
+  --c-ink: #14202f;
+  --c-ink-soft: #5f6b7a;
+  --c-on-deep: #f4efe4;
+  --c-on-deep-soft: #b3aa99;
+  --c-accent: #a8871f;
+  --c-accent-deep: #7a6416;
+  --c-hairline: #ded5c3;
+
+  --c-font-display: var(--font-playfair), Georgia, serif;
+  --c-font-text: var(--font-mulish), system-ui, sans-serif;
+  --c-radius: 0px;
+}
+
+/* ------------------------------------------------------------------ Atelier
+   Cool chalk, near-black navy, champagne. Fashion editorial.
+   Supreme Luxury's typographic tension, inverted into light.
+   -------------------------------------------------------------------------- */
+[data-concept="atelier"] {
+  --c-ground: #fafaf8;
+  --c-ground-body: #fafaf8;
+  --c-tint: #eeeee9;
+  --c-card: #ffffff;
+  --c-deep: #0b1220;
+  --c-ink: #0f1724;
+  --c-ink-soft: #6a7383;
+  --c-on-deep: #f2f0ea;
+  --c-on-deep-soft: #a9a294;
+  --c-accent: #c3a76a;
+  --c-accent-deep: #7d6733;
+  --c-hairline: #e4e4de;
+
+  --c-font-display: var(--font-baskervville), Georgia, serif;
+  --c-font-text: var(--font-inter), system-ui, sans-serif;
+  --c-radius: 0px;
+}
+
+/* ------------------------------------------------------------------ Curtain
+   Cool paper against full brand navy blocks, brand gold at full strength.
+   Cinematic: loader, curtain hero, word-level reveals, numbered chapters.
+   -------------------------------------------------------------------------- */
+[data-concept="curtain"] {
+  --c-ground: #eff2f5;
+  --c-ground-body: #eff2f5;
+  --c-tint: #e0e6ec;
+  --c-card: #ffffff;
+  --c-deep: #0a1628;
+  --c-ink: #101c2c;
+  --c-ink-soft: #59677a;
+  --c-on-deep: #f4f6fa;
+  --c-on-deep-soft: #8fa0b8;
+  --c-accent: #c9a227;
+  --c-accent-deep: #75600f;
+  --c-hairline: #d3dae2;
+
+  --c-font-display: var(--font-fraunces), Georgia, serif;
+  --c-font-text: var(--font-inter), system-ui, sans-serif;
+  /* Softened terminals and the wonk axis on, which is what makes Fraunces
+     read as Fraunces rather than as another high contrast Didone. */
+  --c-display-variation: "SOFT" 40, "WONK" 1, "opsz" 120;
+  --c-radius: 0px;
+}
+
+/* -------------------------------------------------------------- Institution
+   The dark one. The client's existing locked brand, carried forward, so he
+   can judge dark against light with his own eyes rather than in the abstract.
+   -------------------------------------------------------------------------- */
+[data-concept="institution"] {
+  color-scheme: dark;
+  --c-ground: #0a1628;
+  --c-ground-body: #0a1628;
+  --c-tint: #101f35;
+  --c-card: #101f35;
+  --c-deep: #060e1b;
+  --c-ink: #f4f6fa;
+  --c-ink-soft: #8fa0b8;
+  --c-on-deep: #f4f6fa;
+  --c-on-deep-soft: #8fa0b8;
+  --c-accent: #c9a227;
+  --c-accent-deep: #e3c766;
+  --c-hairline: #1d3049;
+
+  --c-font-display: var(--font-instrument-serif), Georgia, serif;
+  --c-font-text: var(--font-geist-sans), system-ui, sans-serif;
+  --c-radius: 0px;
+}
+
+/* ==========================================================================
+   Shared primitives
+   ========================================================================== */
+
+[data-concept] ::selection {
+  background: var(--c-accent);
+  color: #fff;
+}
+
+[data-concept] :focus-visible {
+  outline: 2px solid var(--c-accent-deep);
+  outline-offset: 3px;
+}
+
+/* Anything on the dark block flips its ink roles, so a section component can
+   be dropped onto either ground without knowing which. */
+[data-concept] .on-deep {
+  background: var(--c-deep);
+  color: var(--c-on-deep);
+  --c-ink: var(--c-on-deep);
+  --c-ink-soft: var(--c-on-deep-soft);
+  --c-hairline: color-mix(in oklab, var(--c-on-deep) 16%, transparent);
+  --c-accent-deep: var(--c-accent);
+}
+
+[data-concept] .on-tint {
+  background: var(--c-tint);
+}
+
+.c-display {
+  font-family: var(--c-font-display);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.028em;
+  font-variation-settings: var(--c-display-variation, normal);
+}
+
+.c-eyebrow {
+  font-family: var(--c-font-text);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--c-accent-deep);
+}
+
+.c-rule {
+  border: 0;
+  border-top: 1px solid var(--c-hairline);
+}
+
+/* Scrim behind type on photography. Never text on a bare image. */
+.c-scrim::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    color-mix(in oklab, var(--c-deep) 88%, transparent) 0%,
+    color-mix(in oklab, var(--c-deep) 62%, transparent) 38%,
+    color-mix(in oklab, var(--c-deep) 26%, transparent) 72%,
+    color-mix(in oklab, var(--c-deep) 14%, transparent) 100%
+  );
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Word-level stagger. Each word carries its own delay, set inline.
+   Lifted in spirit from the reference site the advisor graded A.
+   ========================================================================== */
+.c-word,
+.c-in {
+  opacity: 0;
+  transform: translateY(0.55em);
+  animation: c-word-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--wd, 0s);
+}
+
+/* .c-word is a single word inside a masking wrapper, so it must be
+   inline-block. .c-in is the same animation with no opinion about display, for
+   anything that is already a flex row or a block of copy. Using .c-word on a
+   flex container silently collapses it, which is exactly what it did. */
+.c-word {
+  display: inline-block;
+}
+
+@keyframes c-word-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Marquee band. Duration is set per instance. */
+.c-marquee {
+  display: flex;
+  width: max-content;
+  animation: c-marquee var(--md, 40s) linear infinite;
+}
+
+@keyframes c-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c-word,
+  .c-in {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  .c-marquee {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   The Curtain concept's opener.
+
+   Scroll driven, exactly like the Broadsheet one, but publishing --cc so the
+   two never interfere on a shared root element. Navy panels rather than paper,
+   and the hero copy sits above them rather than behind, so the parting reveals
+   the film without ever holding back the words.
+   ========================================================================== */
+html[data-curtain="skip"] .c-curtain {
+  display: none;
+}
+
+.c-cc-track {
+  height: 190svh;
+}
+html[data-curtain="skip"] .c-cc-track {
+  height: 100svh;
+}
+
+.c-curtain-l,
+.c-curtain-r {
+  background: var(--c-deep);
+  will-change: transform;
+}
+.c-curtain-l {
+  transform: translateX(calc(var(--cc, 0) * -101%));
+}
+.c-curtain-r {
+  transform: translateX(calc(var(--cc, 0) * 101%));
+}
+
+/* Sits behind the hero type, so it is kept faint. A bright rule straight down
+   the middle of a centred headline reads as a rendering fault, not a seam. */
+.c-curtain-seam {
+  background: var(--c-accent);
+  opacity: clamp(0, calc(0.3 - var(--cc, 0) * 1.2), 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c-curtain {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   The Broadsheet opener.
+
+   Paper panels rather than navy ones, so it reads as the page itself peeling
+   open rather than as a black loading screen over the top of it. The wordmark
+   splits NAA / HAZ and rides the panels out.
+
+   Timing is deliberately shorter than the Curtain concept's: the name is
+   legible instantly, so there is nothing to wait and read.
+   ========================================================================== */
+html[data-brandcurtain="skip"] .c-brandcurtain {
+  display: none;
+}
+
+/* The hero's scroll track. The hero is pinned inside it with position sticky,
+   and the panels part across the extra height, which is what makes the opener
+   scroll driven rather than timed. Collapsed to a single viewport when the
+   opener is skipped, so a returning visitor never scrolls through dead space
+   to reach the second section. */
+.c-bc-track {
+  height: 190svh;
+}
+html[data-brandcurtain="skip"] .c-bc-track {
+  height: 100svh;
+}
+
+/* Everything below reads --bc, published by components/concepts/CurtainScroll.
+   0 is closed, 1 is fully parted. One variable, so the panels, the seam and
+   the header cannot drift out of agreement. */
+.c-bc-l,
+.c-bc-r {
+  background: var(--c-ground);
+  will-change: transform;
+}
+.c-bc-l {
+  transform: translateX(calc(var(--bc, 0) * -101%));
+  /* A hairline of shadow on the inner edge, so the two panels read as one
+     sheet being parted rather than two rectangles sliding apart. */
+  box-shadow: 6px 0 18px -8px rgb(0 0 0 / 0.35);
+}
+.c-bc-r {
+  transform: translateX(calc(var(--bc, 0) * 101%));
+  box-shadow: -6px 0 18px -8px rgb(0 0 0 / 0.35);
+}
+
+.c-bc-seam {
+  background: var(--c-accent);
+  /* Gone by the time the panels are a third of the way open. */
+  opacity: clamp(0, calc(0.55 - var(--bc, 0) * 1.65), 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c-brandcurtain {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   The service band.
+
+   A solid paper strip pinned to the bottom of the hero. Solid rather than
+   transparent because it has to read identically against the paper panels of
+   the opener and against the hero photograph underneath them, and because it
+   gives the Broadsheet a masthead rule, which is the right device for a
+   concept named after a newspaper.
+   -------------------------------------------------------------------------- */
+.c-band {
+  background: var(--c-ground);
+  border-top: 1px solid var(--c-hairline);
+  border-bottom: 1px solid var(--c-hairline);
+  color: var(--c-ink);
+}
+
+/* The header's over-hero state is light ink, which is invisible against the
+   paper panels while they are still closed. Rather than restyle it for the
+   moment the opener occupies, hold it back and bring it in as the panels
+   clear. That also sells the beat the brief asked for: the name comes apart on
+   the seam and arrives, whole, in the header. */
+html:not([data-brandcurtain="skip"]) [data-concept="broadsheet"] > header {
+  opacity: clamp(0, calc((var(--bc, 0) - 0.55) * 3.2), 1);
+}
+

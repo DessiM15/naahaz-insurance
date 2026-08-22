@@ -4,6 +4,7 @@ import { Loader, LOADER_BOOT_SCRIPT } from "@/components/Loader";
 import { ScrollManager } from "@/components/ScrollManager";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { ChromeGate } from "@/components/layout/ChromeGate";
 import { Ava } from "@/components/chat/Ava";
 import { OrganizationSchema } from "@/components/Schema";
 import { site } from "@/lib/site";
@@ -74,16 +75,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
 
-        <Loader />
+        <ChromeGate>
+          <Loader />
+        </ChromeGate>
         <ScrollManager />
 
         <div id="naahaz-content">
-          <SiteHeader />
+          <ChromeGate>
+            <SiteHeader />
+          </ChromeGate>
           <main id="main">{children}</main>
-          <SiteFooter />
+          <ChromeGate>
+            <SiteFooter />
+          </ChromeGate>
         </div>
 
-        <Ava />
+        <ChromeGate>
+          <Ava />
+        </ChromeGate>
         <OrganizationSchema />
       </body>
     </html>

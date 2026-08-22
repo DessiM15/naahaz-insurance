@@ -209,9 +209,17 @@ body[data-loading="true"] {
   height: 100dvh;
 }
 
-/* Content sits under the loader and lifts in as the curtain opens. */
+/* Content sits under the loader and lifts in as the curtain opens.
+
+   Fill mode is `backwards`, not `both`, and that is load bearing. `both` keeps
+   the final keyframe applied forever, which left `transform: scale(1)` on this
+   element permanently. Any transform other than `none` makes an element the
+   containing block for its `position: fixed` descendants, so the sticky header
+   quietly stopped being fixed and scrolled away with the page once the loader
+   had played. `backwards` applies the starting frame during the delay and then
+   hands the element back to its normal styles, which is all this ever needed. */
 html[data-loader="play"] #naahaz-content {
-  animation: content-settle 0.9s 1.35s var(--ease-out-expo) both;
+  animation: content-settle 0.9s 1.35s var(--ease-out-expo) backwards;
 }
 
 @keyframes content-settle {
