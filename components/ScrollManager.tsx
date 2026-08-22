@@ -13,9 +13,12 @@ import { usePathname } from "next/navigation";
  *   #anchor links        →  still jump to the element. That's intentional,
  *                           not an accident of restoration.
  *
- * The browser's own scroll restoration is disabled in LOADER_BOOT_SCRIPT
- * (`history.scrollRestoration = 'manual'`) because it fires on refresh, which
- * is exactly the behaviour we're removing. We re-implement the half we want.
+ * The browser's own scroll restoration is disabled by the inline script in
+ * app/layout (`history.scrollRestoration = 'manual'`) because it fires on
+ * refresh, which is exactly the behaviour we're removing. We re-implement the
+ * half we want. That line used to live in the loader's boot script; when the
+ * loader was dropped for the Broadsheet it was kept, because this depends on
+ * it — without it, a refresh restores mid-page and fights the rule below.
  */
 
 const KEY = "naahaz:scroll:";
