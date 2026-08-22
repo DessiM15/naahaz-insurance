@@ -1,33 +1,23 @@
-import Link from "next/link";
+import type { Metadata } from "next";
 import { Photo } from "@/components/media/Photo";
 import { Reveal, RevealLines } from "@/components/ui/Reveal";
 import { HeroVideo } from "@/components/concepts/HeroVideo";
 import { WordNodes } from "@/components/concepts/Words";
+import { ConceptHeader, ConceptFooter, ConceptFaqs } from "@/components/concepts/Chrome";
+import { BrandCurtain } from "@/components/concepts/BrandCurtain";
 import { Marquee } from "@/components/concepts/Curtain";
 import { ServiceIndex } from "@/components/concepts/ServiceIndex";
-import { FaqList } from "@/components/sections/FaqList";
-import { LeadSection } from "@/components/sections/LeadSection";
 import { faqs, factsSource, process, verbatim, areaServed, contact, services } from "@/content/concepts";
+
+export const metadata: Metadata = { title: "The Broadsheet" };
 
 /** Pulled from the service list itself so the band can never fall out of date. */
 const band = services.map((s) => s.name);
 
 /**
- * THE HOMEPAGE — The Broadsheet.
+ * CONCEPT ONE: THE BROADSHEET
  *
  * Warm bone ground, navy ink, antique gold. Editorial and established.
- * Chosen from the four concepts on 2026-08-22 and promoted here.
- *
- * Differences from app/concepts/broadsheet, which stays frozen as the record
- * of what was pitched:
- *
- *   - the scroll-driven brand curtain is gone, so the hero is one viewport
- *     rather than a sticky pin inside a 190svh track
- *   - the concept's own header and footer are gone; the real site chrome in
- *     app/layout renders around this page, which is where the mobile menu,
- *     the booking modal and the legal disclaimers live
- *   - hero type is centred
- *   - the lead wizard is back, on the paper surface
  *
  * Section rhythm, HIGH activity against LOW, never two HIGH adjacent:
  *   1 hero, full bleed video                     HIGH   photo ground
@@ -36,19 +26,20 @@ const band = services.map((s) => s.name);
  *   4 how it works, three steps                  LOW    deep navy
  *   5 the Illinois rule, full bleed              HIGH   photo ground
  *   6 answers, FAQ                               LOW    bone
- *   7 enquire, the lead wizard                   LOW    bone
- *   8 book, split panel                          HIGH   tint + photo
+ *   7 book, split panel                          HIGH   tint + photo
  * Four distinct grounds. No section repeats its neighbour.
  */
-export default function HomePage() {
+export default function Broadsheet() {
   return (
-    <div className="bs-paper">
+    <div data-concept="broadsheet">
+      <ConceptHeader concept="broadsheet" />
 
       {/* ═══════════════════════════════════════════════ 1. HERO ── HIGH ── */}
-      {/* One viewport, no scroll track. The concept pinned this inside a
-          190svh track so the brand curtain had travel to part across; without
-          the opener that extra height is just dead space above the fold. */}
-      <section className="relative isolate flex h-svh flex-col justify-end overflow-hidden pb-[4.5rem]">
+      {/* The hero is pinned inside a taller track. The extra height is the
+          travel the opener parts across, which is what makes it scroll driven.
+          The track collapses to one viewport when the opener is skipped. */}
+      <div data-bc-track className="c-bc-track relative">
+        <section className="sticky top-0 isolate flex h-svh flex-col justify-end overflow-hidden pb-[4.5rem]">
         <HeroVideo
           src="/video/hero-generations.mp4"
           poster="/video/poster-generations.jpg"
@@ -56,10 +47,7 @@ export default function HomePage() {
           overlayClassName="bg-[linear-gradient(to_top,rgba(14,27,46,0.92)_0%,rgba(14,27,46,0.55)_42%,rgba(14,27,46,0.22)_75%,rgba(14,27,46,0.42)_100%)]"
         />
 
-        {/* Centred, but still anchored to the bottom of the viewport: the
-            film's subjects sit in the upper two thirds, and moving the type to
-            the optical centre would land the headline on top of them. */}
-        <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 pb-20 text-center lg:px-10 lg:pb-24">
+        <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 pb-20 lg:px-10 lg:pb-24">
           <p
             className="c-in c-eyebrow"
             style={{ color: "#d8b64a", ["--wd" as string]: "0.15s" }}
@@ -71,7 +59,7 @@ export default function HomePage() {
             as="h1"
             start={0.3}
             step={0.06}
-            className="c-display mx-auto mt-6 max-w-[15ch] text-balance text-[clamp(2.9rem,8.2vw,7.2rem)]"
+            className="c-display mt-6 max-w-[15ch] text-[clamp(2.9rem,8.2vw,7.2rem)]"
             nodes={[
               <span key="a" style={{ color: "var(--c-on-deep)" }}>
                 Protecting
@@ -85,16 +73,16 @@ export default function HomePage() {
             ]}
           />
 
-          <div className="mx-auto mt-9 max-w-xl">
+          <div className="mt-9 max-w-xl">
             <p
-              className="c-in mx-auto max-w-xl text-[1.05rem] leading-relaxed"
+              className="c-in max-w-xl text-[1.05rem] leading-relaxed"
               style={{ color: "rgba(244,239,228,0.82)", ["--wd" as string]: "0.75s" }}
             >
               {verbatim.heroSub}.
             </p>
 
             <div
-              className="c-in mt-9 flex flex-wrap items-center justify-center gap-4"
+              className="c-in mt-9 flex flex-wrap items-center gap-4"
               style={{ ["--wd" as string]: "0.9s" }}
             >
               <a
@@ -115,8 +103,10 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* The masthead rule. Every line of business is named here in the
-            first viewport, which is the whole reason it earns the space. */}
+        {/* Sits ABOVE the opener, not behind it. The band a visitor sees while
+            the panels are still closed is this exact element, still running in
+            the same place once they have gone. Nothing is shown and taken
+            away, which is what keeps the opener a surprise rather than a gate. */}
         <div className="c-band absolute inset-x-0 bottom-0 z-40 py-4">
           <Marquee
             items={band}
@@ -126,7 +116,9 @@ export default function HomePage() {
           />
         </div>
 
-      </section>
+        <BrandCurtain />
+        </section>
+      </div>
 
       {/* ════════════════════════════════════════════ 2. PROMISE ── LOW ── */}
       <section className="mx-auto max-w-[1440px] px-6 py-28 lg:px-10 lg:py-36" id="about">
@@ -349,18 +341,12 @@ export default function HomePage() {
           </div>
 
           <Reveal delay={0.12}>
-            <FaqList items={faqs} />
+            <ConceptFaqs items={faqs} />
           </Reveal>
         </div>
       </section>
 
-      {/* ═════════════════════════════════════════ 7. ENQUIRE ── LOW ── */}
-      {/* The concept had no form on it — it was a look, not a funnel. This is
-          the site's actual lead capture, on its paper surface so it belongs to
-          the Broadsheet rather than interrupting it. */}
-      <LeadSection source="home" surface="paper" />
-
-      {/* ═════════════════════════════════════════════ 8. BOOK ── HIGH ── */}
+      {/* ═════════════════════════════════════════════ 7. BOOK ── HIGH ── */}
       <section className="on-tint border-t" style={{ borderColor: "var(--c-hairline)" }} id="book">
         <div className="grid lg:grid-cols-2">
           <div className="relative min-h-[22rem] lg:min-h-[34rem]">
@@ -399,19 +385,16 @@ export default function HomePage() {
                 >
                   Call {contact.phone}
                 </a>
-                <Link
-                  href="/book"
-                  className="inline-flex items-center border-b pb-1 text-[0.74rem] font-semibold uppercase tracking-[0.18em] transition-opacity hover:opacity-70"
-                  style={{ color: "var(--c-ink)", borderColor: "var(--c-accent)" }}
-                >
-                  Or book online
-                </Link>
+                <span className="text-[0.9rem]" style={{ color: "var(--c-ink-soft)" }}>
+                  or book online
+                </span>
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
+      <ConceptFooter concept="broadsheet" />
     </div>
   );
 }

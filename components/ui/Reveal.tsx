@@ -1,7 +1,37 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
-import type { ReactNode } from "react";
+import { motion } from "motion/react";
+import { useSyncExternalStore, type ReactNode } from "react";
+
+/**
+ * Whether to hold this element still.
+ *
+ * Reading the motion preference during render used to produce markup that
+ * disagreed with the server, and React threw a hydration mismatch at every
+ * visitor who had asked for reduced motion. That is the worst possible group
+ * to break.
+ *
+ * useSyncExternalStore is the primitive built for exactly this: it takes a
+ * separate server snapshot, so the server and the first client render always
+ * agree, and React re-renders once with the real value afterwards. It also
+ * subscribes, so a visitor who changes the setting mid-session is respected
+ * without a reload.
+ */
+const REDUCED = "(prefers-reduced-motion: reduce)";
+
+function subscribe(onChange: () => void) {
+  const mq = window.matchMedia(REDUCED);
+  mq.addEventListener("change", onChange);
+  return () => mq.removeEventListener("change", onChange);
+}
+
+function useStill() {
+  return useSyncExternalStore(
+    subscribe,
+    () => window.matchMedia(REDUCED).matches,
+    () => false,
+  );
+}
 
 /**
  * Scroll-driven reveal. The workhorse of the site's motion.
@@ -22,16 +52,20 @@ export function Reveal({
   className?: string;
   as?: "div" | "li" | "section";
 }) {
-  const reduced = useReducedMotion();
+  const still = useStill();
   const Tag = motion[as];
 
   return (
     <Tag
       className={className}
-      initial={{ opacity: 0, y: reduced ? 0 : y }}
+      initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ delay, duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+      transition={
+        still
+          ? { duration: 0 }
+          : { delay, duration: 0.75, ease: [0.16, 1, 0.3, 1] }
+      }
     >
       {children}
     </Tag>
@@ -57,7 +91,7 @@ export function RevealLines({
   id?: string;
   as?: "h1" | "h2";
 }) {
-  const reduced = useReducedMotion();
+  const still = useStill();
 
   return (
     <Tag id={id} className={className}>
@@ -65,10 +99,14 @@ export function RevealLines({
         <span key={i} className="block overflow-hidden">
           <motion.span
             className="block"
-            initial={{ y: reduced ? 0 : "105%", opacity: reduced ? 0 : 1 }}
+            initial={{ y: "105%", opacity: 1 }}
             whileInView={{ y: "0%", opacity: 1 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ delay: i * 0.09, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+            transition={
+              still
+                ? { duration: 0 }
+                : { delay: i * 0.09, duration: 0.85, ease: [0.16, 1, 0.3, 1] }
+            }
           >
             {line}
           </motion.span>

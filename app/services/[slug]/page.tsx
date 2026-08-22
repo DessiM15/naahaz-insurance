@@ -96,14 +96,22 @@ export default async function ServicePage({
         </div>
       </section>
 
+      {/*
+        Everything from here to the CTA is the reading run, on paper.
+        Navy hero, paper body, navy close — dark bookends around the part
+        people actually read. Light-on-dark is measurably harder for extended
+        reading, and it is hardest for exactly the 50-70 audience this page
+        is written for.
+      */}
+      <div className="surface-paper">
       {/* ----------------------------------------------------------- Intro */}
       <section className="container-content py-28">
         <div className="grid gap-14 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.4fr)] lg:gap-20">
           <Reveal>
-            <h2 className="text-h3 font-semibold text-ink-50">The short version</h2>
+            <h2 className="text-h3 font-semibold text-slate-700">The short version</h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="text-lead text-ink-200">{service.intro}</p>
+            <p className="text-lead text-slate-700/90">{service.intro}</p>
           </Reveal>
         </div>
       </section>
@@ -111,18 +119,18 @@ export default async function ServicePage({
       {/* ------------------------------------------------------- Offerings */}
       <section className="container-content pb-28" aria-labelledby="offerings-heading">
         <Reveal>
-          <Eyebrow>What&rsquo;s included</Eyebrow>
-          <h2 id="offerings-heading" className="mt-7 max-w-2xl text-h2 font-semibold text-ink-50">
-            How we <span className="accent-word">help</span>
+          <Eyebrow surface="paper">What&rsquo;s included</Eyebrow>
+          <h2 id="offerings-heading" className="mt-7 max-w-2xl text-h2 font-semibold text-slate-700">
+            How we <span className="accent-word-paper">help</span>
           </h2>
         </Reveal>
 
         <div className="mt-14 grid gap-x-14 gap-y-12 md:grid-cols-2">
           {service.offerings.map((o, i) => (
             <Reveal key={o.title} delay={(i % 2) * 0.08}>
-              <div className="rule-hairline pt-6">
-                <h3 className="text-h3 font-semibold text-ink-50">{o.title}</h3>
-                <p className="mt-4 text-ink-300">{o.body}</p>
+              <div className="rule-paper pt-6">
+                <h3 className="text-h3 font-semibold text-slate-700">{o.title}</h3>
+                <p className="mt-4 text-slate-700/85">{o.body}</p>
               </div>
             </Reveal>
           ))}
@@ -131,14 +139,14 @@ export default async function ServicePage({
 
       {/* ---------------------------------------------------------- Who for */}
       <section className="grain relative overflow-hidden py-28" aria-labelledby="whofor-heading">
-        <div className="absolute inset-0 bg-navy-800/40" aria-hidden />
+        <div className="absolute inset-0 bg-paper-200/70" aria-hidden />
         <div className="grain-layer" aria-hidden />
         <div className="container-content relative grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
           <div>
             <Reveal>
-              <Eyebrow>Is this you?</Eyebrow>
-              <h2 id="whofor-heading" className="mt-7 text-h2 font-semibold text-ink-50">
-                Worth a <span className="accent-word">conversation</span> if
+              <Eyebrow surface="paper">Is this you?</Eyebrow>
+              <h2 id="whofor-heading" className="mt-7 text-h2 font-semibold text-slate-700">
+                Worth a <span className="accent-word-paper">conversation</span> if
               </h2>
             </Reveal>
 
@@ -147,9 +155,9 @@ export default async function ServicePage({
                 <Reveal as="li" key={w} delay={i * 0.06}>
                   <div className="flex gap-4">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="mt-1 shrink-0" aria-hidden>
-                      <path d="M4 12.5l5 5L20 7" stroke="var(--color-gold-500)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M4 12.5l5 5L20 7" stroke="var(--color-gold-600)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <span className="text-lead text-ink-200">{w}</span>
+                    <span className="text-lead text-slate-700/90">{w}</span>
                   </div>
                 </Reveal>
               ))}
@@ -157,26 +165,27 @@ export default async function ServicePage({
           </div>
 
           <Reveal delay={0.14}>
-            <div className="relative aspect-4/5 overflow-hidden rounded-3xl border border-navy-700 sm:aspect-4/3 lg:aspect-4/5">
+            <div className="relative aspect-4/5 overflow-hidden rounded-3xl border border-paper-300 sm:aspect-4/3 lg:aspect-4/5">
               <Duotone
                 src={service.detailImage}
                 alt={service.detailAlt}
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 intensity={0.85}
+                surface="paper"
               />
             </div>
           </Reveal>
         </div>
       </section>
 
-      <Faqs faqs={service.faqs} />
+      <Faqs faqs={service.faqs} surface="paper" />
 
-      {service.medicareDisclaimer && <MedicareDisclaimer />}
+      {service.medicareDisclaimer && <MedicareDisclaimer surface="paper" />}
 
       {/* --------------------------------------------------------- Related */}
       <section className="container-content py-20" aria-labelledby="related-heading">
         <Reveal>
-          <h2 id="related-heading" className="text-h3 font-semibold text-ink-50">
+          <h2 id="related-heading" className="text-h3 font-semibold text-slate-700">
             Often looked at alongside
           </h2>
         </Reveal>
@@ -185,16 +194,16 @@ export default async function ServicePage({
             <Reveal key={r.slug} delay={i * 0.07}>
               <Link
                 href={`/services/${r.slug}`}
-                className="group relative flex min-h-40 flex-col justify-end overflow-hidden rounded-2xl border border-navy-700 p-6 transition-colors duration-500 hover:border-gold-500/50"
+                className="group relative flex min-h-40 flex-col justify-end overflow-hidden rounded-2xl border border-paper-300 p-6 transition-colors duration-500 hover:border-gold-600/50"
               >
                 <Photo
                   src={r.image}
                   alt=""
                   fill
                   sizes="(max-width: 640px) 100vw, 33vw"
-                  className="object-cover opacity-25 transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-950 to-navy-950/50" aria-hidden />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/92 via-navy-950/55 to-navy-950/20" aria-hidden />
                 <span className="relative font-medium text-ink-50">{r.name}</span>
               </Link>
             </Reveal>
@@ -203,12 +212,14 @@ export default async function ServicePage({
       </section>
 
       <LeadSection
+        surface="paper"
         defaultInterest={service.slug}
         source={`service:${service.slug}`}
         eyebrow={service.short}
-        heading={<>Let&rsquo;s talk about <span className="accent-word">{service.short.toLowerCase()}</span></>}
+        heading={<>Let&rsquo;s talk about <span className="accent-word-paper">{service.short.toLowerCase()}</span></>}
         body="Tell us where you are and we'll come back with something useful. The first conversation is free and there's no obligation attached to it."
       />
+      </div>
 
       <CtaBand />
     </>

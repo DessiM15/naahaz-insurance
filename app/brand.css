@@ -1,0 +1,170 @@
+/* ==========================================================================
+   THE BROADSHEET — the live brand surface
+   Chosen from the four homepage concepts on 2026-08-22.
+
+   Warm bone ground, navy ink, antique gold. These are the same seven token
+   roles the concept pages use, lifted out of app/concepts/concepts.css so the
+   live site owns them outright.
+
+   The concept routes keep their own copy on purpose. They are a frozen record
+   of what was presented to the client, and nothing edited here should be able
+   to reach back and change what he was shown.
+
+   Scope is [data-brand], not [data-concept], so the two never collide on the
+   concept routes — where both stylesheets are loaded, because the root layout
+   wraps those pages too.
+   ========================================================================== */
+
+[data-brand="broadsheet"] {
+  --c-ground: #f7f4ed;      /* page background */
+  --c-tint: #ece5d6;        /* second ground, for alternating sections */
+  --c-card: #fffdf8;        /* raised surface */
+  --c-deep: #0e1b2e;        /* third ground: the dark block */
+  --c-ink: #14202f;         /* body text on ground */
+  --c-ink-soft: #5f6b7a;    /* secondary text on ground */
+  --c-on-deep: #f4efe4;     /* text on the dark block */
+  --c-on-deep-soft: #b3aa99;
+  --c-accent: #a8871f;      /* antique gold */
+  --c-accent-deep: #7a6416; /* the gold that passes AA as small text on bone */
+  --c-hairline: #ded5c3;
+
+  --c-font-display: var(--font-playfair), Georgia, serif;
+  --c-font-text: var(--font-mulish), system-ui, sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   Grounds.
+
+   The ground is applied by .bs-paper rather than by [data-brand] itself. The
+   brand wrapper is site-wide so the header and footer can read the tokens on
+   every route, but only the pages that have actually been redesigned should
+   have their background repainted. The navy pages keep the navy body from
+   globals.css until they are converted in turn.
+   -------------------------------------------------------------------------- */
+.bs-paper {
+  background: var(--c-ground);
+  color: var(--c-ink);
+  font-family: var(--c-font-text);
+  color-scheme: light;
+}
+
+/* The bone has to reach past the wrapper, or an overscroll bounce shows the
+   navy body colour underneath it. */
+body:has(.bs-paper) {
+  background: var(--c-ground, #f7f4ed);
+}
+
+/* Selection and focus both need inverting against bone, or they vanish. */
+.bs-paper ::selection {
+  background: var(--c-accent);
+  color: #fff;
+}
+
+.bs-paper :focus-visible {
+  outline: 2px solid var(--c-accent-deep);
+  outline-offset: 3px;
+}
+
+/* Anything on the dark block flips its ink roles, so a section can be dropped
+   onto either ground without knowing which one it landed on. */
+[data-brand] .on-deep {
+  background: var(--c-deep);
+  color: var(--c-on-deep);
+  --c-ink: var(--c-on-deep);
+  --c-ink-soft: var(--c-on-deep-soft);
+  --c-hairline: color-mix(in oklab, var(--c-on-deep) 16%, transparent);
+  --c-accent-deep: var(--c-accent);
+}
+
+[data-brand] .on-tint {
+  background: var(--c-tint);
+}
+
+/* ==========================================================================
+   Type primitives
+   ========================================================================== */
+
+[data-brand] .c-display {
+  font-family: var(--c-font-display);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.028em;
+}
+
+[data-brand] .c-eyebrow {
+  font-family: var(--c-font-text);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--c-accent-deep);
+}
+
+[data-brand] .c-rule {
+  border: 0;
+  border-top: 1px solid var(--c-hairline);
+}
+
+/* ==========================================================================
+   Word-level stagger. Each word carries its own delay, set inline, so the
+   headline animates from first paint instead of waiting for hydration.
+   ========================================================================== */
+
+[data-brand] .c-word,
+[data-brand] .c-in {
+  opacity: 0;
+  transform: translateY(0.55em);
+  animation: c-word-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--wd, 0s);
+}
+
+/* .c-word is a single word inside a masking wrapper, so it must be
+   inline-block. .c-in is the same animation with no opinion about display,
+   for anything that is already a flex row or a block of copy. */
+[data-brand] .c-word {
+  display: inline-block;
+}
+
+@keyframes c-word-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   The service band. A solid paper strip pinned to the bottom of the hero,
+   which gives the homepage a masthead rule — the right device for a layout
+   named after a newspaper.
+   ========================================================================== */
+
+[data-brand] .c-marquee {
+  display: flex;
+  width: max-content;
+  animation: c-marquee var(--md, 40s) linear infinite;
+}
+
+@keyframes c-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+[data-brand] .c-band {
+  background: var(--c-ground);
+  border-top: 1px solid var(--c-hairline);
+  border-bottom: 1px solid var(--c-hairline);
+  color: var(--c-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-brand] .c-word,
+  [data-brand] .c-in {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  [data-brand] .c-marquee {
+    animation: none;
+  }
+}

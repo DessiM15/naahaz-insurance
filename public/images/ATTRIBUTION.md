@@ -13,8 +13,7 @@ an image, check it isn't already here.
 |---|---|
 | `hero/horizon-couple.jpg` | Katarzyna Grabowska |
 | `services/retirement-planning.jpg` | Florian van Schreven |
-| `services/income-strategies.jpg` | Raymond Petrik |
-| `services/medicare.jpg` | Armin Lotfi |
+
 | `services/life-insurance.jpg` | Pana K |
 | `services/long-term-care.jpg` | Rod Long |
 | `services/health-insurance.jpg` | Iryna Studenets |
@@ -92,3 +91,24 @@ A JPEG at that size is roughly 1.6KB because the header dominates, which is
 seven times the cost for the same visual result. The map is server-only and is
 deliberately kept out of the client bundle: `Duotone` reads it, and the
 client-side hero composes `DuotoneOverlays` instead.
+
+## Still frames from stock footage
+
+Two slots needed a photograph that free stock libraries did not have, so the
+frames were pulled from video instead. Source: [Mixkit](https://mixkit.co),
+under the [Mixkit Free Licence](https://mixkit.co/license/), which permits
+commercial use without attribution. Credited here anyway.
+
+| File | Source clip |
+|---|---|
+| `sections/illinois-rule.jpg` | mixkit 22510, senior couple walking at sunset |
+| `sections/kitchen-table.jpg` | mixkit 35976, grandparents with their grandchildren |
+| `services/medicare.jpg` | mixkit 36147, grandparents with their grandchildren |
+| `services/income-strategies.jpg` | mixkit 23524, separating money for different budgets |
+| `video/hero-generations.mp4` | mixkit 6472, three generations walking at sunset |
+| `video/hero-montage.mp4` | mixkit 6472, 4661, 27372 and 33968, cut together |
+
+**These are 1280px wide, which is the ceiling of the free source.** Fine at the
+sizes they run at here, not fine for a full width desktop hero. Replacing them
+with licensed stills, or with real photography of the Alis and their office, is
+the single biggest available upgrade to how this site looks.

@@ -83,7 +83,10 @@ export function LogoLink({ className = "" }: { className?: string }) {
     <Link
       href="/"
       aria-label={`${site.name} — home`}
-      className={`inline-flex items-center text-ink-50 transition-opacity duration-300 hover:opacity-80 ${className}`}
+      /* Colour is inherited, not set. The header is transparent light ink over
+         the hero and navy ink once it takes the paper ground, and the wordmark
+         strokes are currentColor, so it has to follow whatever the header is. */
+      className={`inline-flex items-center transition-opacity duration-300 hover:opacity-80 ${className}`}
     >
       <Logo variant="primary" />
     </Link>
