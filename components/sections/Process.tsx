@@ -31,7 +31,9 @@ export function Process() {
         sizes="100vw"
         className="object-cover opacity-[0.14]"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-900 via-navy-900/85 to-navy-900" aria-hidden />
+      {/* Broadsheet's deep, #0e1b2e, rather than the brand navy-900. The dark
+          block has to be the same ink as the one on the homepage. */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0e1b2e] via-[#0e1b2e]/85 to-[#0e1b2e]" aria-hidden />
       <div className="grain-layer" aria-hidden />
 
       <div className="container-content relative">

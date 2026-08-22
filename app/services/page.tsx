@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <>
+    <div className="bs-paper">
       <BreadcrumbSchema trail={[{ name: "Home", href: "/" }, { name: "Services", href: "/services" }]} />
 
       {/* Hub hero */}
@@ -32,8 +32,7 @@ export default function ServicesPage() {
           sizes="100vw"
           className="object-cover opacity-40"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/80 to-navy-950/40" aria-hidden />
-        <div className="mesh-drift absolute inset-0 opacity-50" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0e1b2e] via-[#0e1b2e]/80 to-[#0e1b2e]/40" aria-hidden />
         <div className="grain-layer" aria-hidden />
 
         <div className="container-content relative">
@@ -56,11 +55,11 @@ export default function ServicesPage() {
       {/* Additional lines */}
       <section className="container-content pb-8" aria-labelledby="also-heading">
         <Reveal>
-          <div className="rule-hairline pt-10">
-            <h2 id="also-heading" className="text-h3 font-semibold text-ink-50">
+          <div className="rule-paper pt-10">
+            <h2 id="also-heading" className="text-h3 font-semibold text-slate-700">
               We also handle
             </h2>
-            <p className="mt-3 max-w-2xl text-ink-500">
+            <p className="mt-3 max-w-2xl text-slate-500">
               These sit within the pages above — follow the link and you&rsquo;ll land in
               the right place.
             </p>
@@ -69,7 +68,7 @@ export default function ServicesPage() {
                 <li key={l.name}>
                   <Link
                     href={l.href}
-                    className="inline-flex items-center rounded-full border border-navy-600 px-5 text-[0.9rem] text-ink-300 transition-all duration-300 hover:border-gold-500/60 hover:text-gold-400"
+                    className="inline-flex items-center border border-paper-300 px-5 text-[0.85rem] text-slate-700 transition-all duration-300 hover:border-gold-600 hover:bg-paper-200"
                   >
                     {l.name}
                   </Link>
@@ -89,7 +88,7 @@ export default function ServicesPage() {
           sizes="100vw"
           className="object-cover opacity-30"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/85 to-navy-950/45" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0e1b2e] via-[#0e1b2e]/85 to-[#0e1b2e]/45" aria-hidden />
         <div className="grain-layer" aria-hidden />
 
         <div className="container-content relative">
@@ -109,11 +108,11 @@ export default function ServicesPage() {
       {/* Resources — where the legacy /videos page now lives */}
       <section id="resources" className="container-content py-24" aria-labelledby="resources-heading">
         <Reveal>
-          <Eyebrow>Resources</Eyebrow>
-          <h2 id="resources-heading" className="mt-7 text-h2 font-semibold text-ink-50">
-            Videos &amp; <span className="accent-word">guides</span>
+          <Eyebrow surface="paper">Resources</Eyebrow>
+          <h2 id="resources-heading" className="mt-7 text-h2 font-semibold text-slate-700">
+            Videos &amp; <span className="accent-word-paper">guides</span>
           </h2>
-          <p className="mt-6 max-w-2xl text-ink-300">
+          <p className="mt-6 max-w-2xl text-slate-700/85">
             Short explainers on the topics people ask about most.
           </p>
         </Reveal>
@@ -124,17 +123,17 @@ export default function ServicesPage() {
           frames — no third-party player script until someone hits play.
         */}
         <Reveal delay={0.12}>
-          <div className="mt-10 rounded-3xl border border-dashed border-navy-600 bg-navy-800/40 p-12 text-center">
-            <p className="mx-auto max-w-lg text-ink-300">
+          <div className="mt-10 border border-dashed border-paper-300 bg-paper-200/60 p-12 text-center">
+            <p className="mx-auto max-w-lg text-slate-500">
               Video grid is built and waiting on the embed URLs from the existing{" "}
-              <span className="text-ink-50">/videos</span> page.
+              <span className="text-slate-700">/videos</span> page.
             </p>
           </div>
         </Reveal>
       </section>
 
-      <LeadSection source="services-hub" />
+      <LeadSection source="services-hub" surface="paper" />
       <CtaBand />
-    </>
+    </div>
   );
 }

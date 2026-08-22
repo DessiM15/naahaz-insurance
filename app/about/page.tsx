@@ -24,7 +24,7 @@ const VALUES = [
 
 export default function AboutPage() {
   return (
-    <>
+    <div className="bs-paper">
       <BreadcrumbSchema trail={[{ name: "Home", href: "/" }, { name: "About", href: "/about" }]} />
 
       {/* ------------------------------------------------------------ Hero */}
@@ -35,8 +35,7 @@ export default function AboutPage() {
           priority
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/80 to-navy-950/40" aria-hidden />
-        <div className="mesh-drift absolute inset-0 opacity-50" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0e1b2e] via-[#0e1b2e]/80 to-[#0e1b2e]/40" aria-hidden />
 
         <div className="container-content relative">
           <Reveal>
@@ -56,7 +55,7 @@ export default function AboutPage() {
       {/* --------------------------------------------------------- The name */}
       <section className="container-content py-28" aria-labelledby="name-heading">
         <Reveal>
-          <div className="relative mb-20 aspect-21/9 overflow-hidden rounded-3xl border border-navy-700">
+          <div className="relative mb-20 aspect-21/9 overflow-hidden border border-paper-300">
             <Duotone
               src="/images/about/generations.jpg"
               alt="An adult and a child standing together at the shoreline"
@@ -68,10 +67,12 @@ export default function AboutPage() {
 
         <div className="grid gap-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] lg:gap-20">
           <Reveal>
-            <Eyebrow>Where the name comes from</Eyebrow>
-            <h2 id="name-heading" className="mt-7 text-h2 font-semibold text-ink-50">
-              <span className="text-gold-500">Na</span>ureen and{" "}
-              <span className="text-gold-500">Az</span>iz
+            <Eyebrow surface="paper">Where the name comes from</Eyebrow>
+            <h2 id="name-heading" className="mt-7 text-h2 font-semibold text-slate-700">
+              {/* gold-700, not gold-500: only the darkest gold clears AA as
+                  text on paper. See the token block in app/globals.css. */}
+              <span className="text-gold-700">Na</span>ureen and{" "}
+              <span className="text-gold-700">Az</span>iz
             </h2>
             {/*
               TODO(client): confirm the NAAHAZ = Naureen + Aziz origin. It's a
@@ -83,7 +84,7 @@ export default function AboutPage() {
 
           <div className="lg:pt-3">
             <Reveal delay={0.1}>
-              <p className="text-lead text-ink-200">
+              <p className="text-lead text-slate-700">
                 The agency carries the names of the two people who run it. That isn&rsquo;t
                 branding — it&rsquo;s accountability. When something goes wrong with a claim,
                 you aren&rsquo;t routed to a call centre. You call the people whose names are
@@ -91,10 +92,10 @@ export default function AboutPage() {
               </p>
             </Reveal>
             <Reveal delay={0.18}>
-              <p className="mt-7 text-ink-300">{clientCopy.mission}</p>
+              <p className="mt-7 text-slate-700/85">{clientCopy.mission}</p>
             </Reveal>
             <Reveal delay={0.26}>
-              <p className="mt-7 text-ink-300">
+              <p className="mt-7 text-slate-700/85">
                 We work with individuals, families and businesses across Illinois, and
                 we serve clients in both English and Russian. Being independent means
                 we aren&rsquo;t tied to any one carrier — we shop the market and bring you
@@ -108,33 +109,33 @@ export default function AboutPage() {
       {/* ----------------------------------------------------------- People */}
       <section className="container-content pb-28" aria-labelledby="people-heading">
         <Reveal>
-          <h2 id="people-heading" className="text-h2 font-semibold text-ink-50">
-            The people you&rsquo;ll <span className="accent-word">actually talk to</span>
+          <h2 id="people-heading" className="text-h2 font-semibold text-slate-700">
+            The people you&rsquo;ll <span className="accent-word-paper">actually talk to</span>
           </h2>
         </Reveal>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:max-w-3xl">
           {site.founders.map((f, i) => (
             <Reveal key={f.name} delay={i * 0.1}>
-              <div className="overflow-hidden rounded-2xl border border-navy-700 bg-navy-800/50">
+              <div className="overflow-hidden border border-paper-300 bg-paper-100">
                 {/*
                   TODO(client): headshots needed. The slot is designed and sized —
                   drop a photo in and it renders. Real faces are the single
                   biggest trust signal on an insurance site, so this is the most
                   valuable outstanding asset.
                 */}
-                <div className="flex aspect-4/5 items-center justify-center border-b border-navy-700 bg-navy-900/60">
+                <div className="flex aspect-4/5 items-center justify-center border-b border-paper-300 bg-paper-200">
                   <div className="text-center">
-                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" className="mx-auto text-navy-600" aria-hidden>
+                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" className="mx-auto text-slate-500/60" aria-hidden>
                       <circle cx="12" cy="8.5" r="3.6" stroke="currentColor" strokeWidth="1.5" />
                       <path d="M4.5 20a7.5 7.5 0 0115 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                     </svg>
-                    <p className="mt-3 text-[0.78rem] text-ink-500">Photo to come</p>
+                    <p className="mt-3 text-[0.78rem] text-slate-500">Photo to come</p>
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-h3 font-semibold text-ink-50">{f.name}</h3>
-                  <p className="mt-1.5 text-[0.9rem] text-gold-400">{f.role}</p>
+                  <h3 className="text-h3 font-semibold text-slate-700">{f.name}</h3>
+                  <p className="mt-1.5 text-[0.9rem] text-slate-500">{f.role}</p>
                 </div>
               </div>
             </Reveal>
@@ -143,31 +144,31 @@ export default function AboutPage() {
       </section>
 
       {/* ----------------------------------------------------------- Values */}
-      <section className="grain relative overflow-hidden py-28" aria-labelledby="values-heading">
-        <div className="absolute inset-0 bg-navy-800/40" aria-hidden />
-        <div className="grain-layer" aria-hidden />
+      {/* The alternating ground. Broadsheet runs bone, tint, bone rather than
+          two identical sections in a row. */}
+      <section className="on-tint relative overflow-hidden py-28" aria-labelledby="values-heading">
         <div className="container-content relative">
           <Reveal>
-            <Eyebrow>What we stand on</Eyebrow>
-            <h2 id="values-heading" className="mt-7 max-w-2xl text-h2 font-semibold text-ink-50">
+            <Eyebrow surface="paper">What we stand on</Eyebrow>
+            <h2 id="values-heading" className="mt-7 max-w-2xl text-h2 font-semibold text-slate-700">
               Built on {clientCopy.values.split(",")[0]},{" "}
-              <span className="accent-word">transparency</span>, and listening
+              <span className="accent-word-paper">transparency</span>, and listening
             </h2>
           </Reveal>
 
           <div className="mt-14 grid gap-10 md:grid-cols-3">
             {VALUES.map((v, i) => (
               <Reveal key={v.title} delay={i * 0.1}>
-                <div className="rule-hairline pt-6">
-                  <h3 className="text-h3 font-semibold text-ink-50">{v.title}</h3>
-                  <p className="mt-4 text-ink-300">{v.body}</p>
+                <div className="rule-paper pt-6">
+                  <h3 className="text-h3 font-semibold text-slate-700">{v.title}</h3>
+                  <p className="mt-4 text-slate-700/85">{v.body}</p>
                 </div>
               </Reveal>
             ))}
           </div>
 
           <Reveal delay={0.24}>
-            <div className="relative mt-16 aspect-21/9 overflow-hidden rounded-3xl border border-navy-700">
+            <div className="relative mt-16 aspect-21/9 overflow-hidden border border-paper-300">
               <Photo
                 src="/images/about/office.jpg"
                 alt="A quiet meeting room with natural light"
@@ -185,17 +186,17 @@ export default function AboutPage() {
       <section className="container-content py-28" aria-labelledby="local-heading">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
           <Reveal>
-            <Eyebrow>Rolling Meadows, Illinois</Eyebrow>
-            <h2 id="local-heading" className="mt-7 text-h2 font-semibold text-ink-50">
-              A <span className="accent-word">Chicagoland</span> practice
+            <Eyebrow surface="paper">Rolling Meadows, Illinois</Eyebrow>
+            <h2 id="local-heading" className="mt-7 text-h2 font-semibold text-slate-700">
+              A <span className="accent-word-paper">Chicagoland</span> practice
             </h2>
-            <p className="mt-7 text-lead text-ink-300">
+            <p className="mt-7 text-lead text-slate-700/85">
               We&rsquo;re based in Rolling Meadows and most of our clients are within an
               hour of the office. That matters more than it sounds — plan
               availability, provider networks and care costs are all local
               questions, and we know this market.
             </p>
-            <address className="mt-9 not-italic text-ink-300">
+            <address className="mt-9 not-italic text-slate-700/85">
               {site.contact.address.street}
               <br />
               {site.contact.address.city}, {site.contact.address.region}{" "}
@@ -204,7 +205,7 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal delay={0.12}>
-            <div className="relative aspect-4/3 overflow-hidden rounded-2xl border border-navy-700">
+            <div className="relative aspect-4/3 overflow-hidden border border-paper-300">
               <Photo
                 src="/images/about/chicago.jpg"
                 alt="Chicago architecture against a bright sky"
@@ -221,17 +222,17 @@ export default function AboutPage() {
       {/* --------------------------------------------------- Testimonials */}
       <section id="testimonials" className="container-content pb-28" aria-labelledby="testimonials-heading">
         <Reveal>
-          <Eyebrow>Client reviews</Eyebrow>
-          <h2 id="testimonials-heading" className="mt-7 text-h2 font-semibold text-ink-50">
-            In their <span className="accent-word">words</span>
+          <Eyebrow surface="paper">Client reviews</Eyebrow>
+          <h2 id="testimonials-heading" className="mt-7 text-h2 font-semibold text-slate-700">
+            In their <span className="accent-word-paper">words</span>
           </h2>
         </Reveal>
         {/* TODO(client): real testimonials. Legacy /insurance-reviews 301s here. */}
         <Reveal delay={0.12}>
-          <div className="mt-10 rounded-3xl border border-dashed border-navy-600 bg-navy-800/40 p-12 text-center">
-            <p className="mx-auto max-w-lg text-ink-300">
+          <div className="mt-10 border border-dashed border-paper-300 bg-paper-200/60 p-12 text-center">
+            <p className="mx-auto max-w-lg text-slate-500">
               Built and waiting on real reviews — the legacy{" "}
-              <span className="text-ink-50">/insurance-reviews</span> page redirects
+              <span className="text-slate-700">/insurance-reviews</span> page redirects
               here. Send three or four and they drop in with Review schema attached.
             </p>
           </div>
@@ -244,6 +245,6 @@ export default function AboutPage() {
         body="No pitch and no obligation — just a straight assessment of where you stand."
         image="/images/about/community.jpg"
       />
-    </>
+    </div>
   );
 }

@@ -30,8 +30,7 @@ export default function NotFound() {
         intensity={1}
         className="opacity-40"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/85 to-navy-950/60" aria-hidden />
-      <div className="mesh-drift absolute inset-0 opacity-40" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0e1b2e] via-[#0e1b2e]/85 to-[#0e1b2e]/60" aria-hidden />
 
       <div className="container-content relative">
         <Eyebrow>404</Eyebrow>
@@ -64,7 +63,7 @@ export default function NotFound() {
             <li key={s.slug}>
               <Link
                 href={`/services/${s.slug}`}
-                className="inline-flex items-center rounded-full border border-navy-600 bg-navy-900/40 px-5 text-[0.88rem] text-ink-300 backdrop-blur-sm transition-all duration-300 hover:border-gold-500/60 hover:text-gold-400"
+                className="inline-flex items-center border border-ink-50/25 px-5 text-[0.85rem] text-ink-300 transition-all duration-300 hover:border-gold-500 hover:text-gold-400"
               >
                 {s.short}
               </Link>
