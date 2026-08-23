@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <LegalPage
-      title="Privacy Policy"
+      title="Privacy {Policy}"
       lede={`How ${site.name} handles the information you share with us.`}
       needsReview
     >

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <LegalPage
-      title="Terms & Conditions"
+      title="Terms & {Conditions}"
       lede={`The terms that govern your use of this website.`}
       needsReview
     >
