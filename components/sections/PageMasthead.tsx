@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 
 /**
  * The section front.
@@ -21,6 +21,16 @@ import type { ReactNode } from "react";
  * Splits on spaces, keeps {braced} runs accented, and gives each word its own
  * delay.
  *
+ * THE SPACE GOES BETWEEN THE WRAPPERS, NOT INSIDE THEM. Each word sits in an
+ * inline-block so it can be masked, and CSS removes white space at the end of
+ * a line box — so a space placed inside the wrapper contributes no width at
+ * all and every word runs into the next. components/concepts/Words.tsx solves
+ * the same problem with a literal non-breaking space instead, which works but
+ * is not trimmed at a wrap point either: the trailing nbsp keeps its width at
+ * the end of a wrapped line and pulls a centred headline off centre by half a
+ * space. An ordinary space, emitted as a sibling, renders between the words
+ * and is correctly dropped where the line breaks.
+ *
  * The brace run can span several words — "in {one place}" — so it is tracked
  * across the loop rather than tested per word. Testing each word on its own
  * accented "{one" and missed "place}", which silently half-styled the title.
@@ -36,22 +46,21 @@ function words(title: string, start: number, step: number) {
 
     const clean = word.replace(/[{}]/g, "");
     return (
-      <span
-        key={i}
-        className="inline-block overflow-hidden align-bottom pb-[0.14em] -mb-[0.14em]"
-      >
-        <span
-          className="c-word"
-          style={{ ["--wd" as string]: `${(start + i * step).toFixed(3)}s` }}
-        >
-          {accent ? (
-            <span style={{ fontStyle: "italic", color: "var(--c-accent-deep)" }}>{clean}</span>
-          ) : (
-            clean
-          )}
+      <Fragment key={i}>
+        <span className="inline-block overflow-hidden align-bottom pb-[0.14em] -mb-[0.14em]">
+          <span
+            className="c-word"
+            style={{ ["--wd" as string]: `${(start + i * step).toFixed(3)}s` }}
+          >
+            {accent ? (
+              <span style={{ fontStyle: "italic", color: "var(--c-accent-deep)" }}>{clean}</span>
+            ) : (
+              clean
+            )}
+          </span>
         </span>
         {i < parts.length - 1 ? " " : ""}
-      </span>
+      </Fragment>
     );
   });
 }
