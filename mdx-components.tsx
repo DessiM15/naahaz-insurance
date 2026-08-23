@@ -36,6 +36,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     em: ({ children }) => <em className="accent-word-paper not-italic italic">{children}</em>,
     hr: () => <hr className="rule-paper mt-14 border-0" />,
+    /* A pull quote, for the line in a post worth stopping on. Written in the
+       .mdx as an ordinary blockquote. A rule and a size change — no quotation
+       marks, no box, because the Broadsheet does not decorate. */
+    blockquote: ({ children }) => (
+      <blockquote className="bs-pullquote my-12">{children}</blockquote>
+    ),
     /* Gold measures 3.11:1 on paper and fails AA as body text, so the link is
        slate and the gold survives as the underline, which carries no contrast
        requirement. Same rule as components/ui/tone.ts. */

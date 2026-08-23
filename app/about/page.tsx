@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Photo } from "@/components/media/Photo";
-import { Reveal, RevealLines } from "@/components/ui/Reveal";
+import { Reveal } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { PageMasthead } from "@/components/sections/PageMasthead";
+import { ComingSoon } from "@/components/sections/ComingSoon";
 import { Duotone } from "@/components/media/Duotone";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { Process } from "@/components/sections/Process";
@@ -27,44 +29,30 @@ export default function AboutPage() {
     <div className="bs-paper">
       <BreadcrumbSchema trail={[{ name: "Home", href: "/" }, { name: "About", href: "/about" }]} />
 
-      {/* ------------------------------------------------------------ Hero */}
-      <section className="grain relative flex min-h-[70svh] items-end overflow-hidden pb-24 pt-40">
+      <PageMasthead
+        eyebrow="About NAAHAZ Inc."
+        title="Two names. One {promise}."
+        lede={clientCopy.aboutIntro}
+      />
+
+      {/* The photograph sits under the masthead, full bleed, so the page still
+          opens on a face rather than on type alone. */}
+      <div className="relative h-[40svh] min-h-64 overflow-hidden lg:h-[56svh]">
         <Duotone
           src="/images/about/hero.jpg"
           alt="Two people talking across a desk in a bright office"
           priority
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0e1b2e] via-[#0e1b2e]/80 to-[#0e1b2e]/40" aria-hidden />
-
-        <div className="container-content relative">
-          <Reveal>
-            <Eyebrow>About NAAHAZ Inc.</Eyebrow>
-          </Reveal>
-          <RevealLines
-            as="h1"
-            className="mt-8 max-w-4xl text-h1 font-semibold text-ink-50"
-            lines={["Two names.", <>One <span className="accent-word">promise</span>.</>]}
-          />
-          <Reveal delay={0.2}>
-            <p className="mt-8 max-w-2xl text-lead text-ink-300">{clientCopy.aboutIntro}</p>
-          </Reveal>
-        </div>
-      </section>
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to top, rgba(14,27,46,0.5) 0%, rgba(14,27,46,0.1) 60%, rgba(14,27,46,0.28) 100%)" }}
+          aria-hidden
+        />
+      </div>
 
       {/* --------------------------------------------------------- The name */}
       <section className="container-content py-28" aria-labelledby="name-heading">
-        <Reveal>
-          <div className="relative mb-20 aspect-21/9 overflow-hidden border border-paper-300">
-            <Duotone
-              src="/images/about/generations.jpg"
-              alt="An adult and a child standing together at the shoreline"
-              sizes="100vw"
-              intensity={0.85}
-            />
-          </div>
-        </Reveal>
-
         <div className="grid gap-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] lg:gap-20">
           <Reveal>
             <Eyebrow surface="paper">Where the name comes from</Eyebrow>
@@ -229,12 +217,14 @@ export default function AboutPage() {
         </Reveal>
         {/* TODO(client): real testimonials. Legacy /insurance-reviews 301s here. */}
         <Reveal delay={0.12}>
-          <div className="mt-10 border border-dashed border-paper-300 bg-paper-200/60 p-12 text-center">
-            <p className="mx-auto max-w-lg text-slate-500">
-              Built and waiting on real reviews — the legacy{" "}
-              <span className="text-slate-700">/insurance-reviews</span> page redirects
-              here. Send three or four and they drop in with Review schema attached.
-            </p>
+          <div className="mt-10">
+            <ComingSoon label="Waiting on the client" title="In their words" numeral="—">
+              Real reviews only. Nothing here is invented, which is why the slot is
+              empty rather than filled with plausible-sounding quotes. The legacy{" "}
+              <span style={{ color: "var(--c-ink)" }}>/insurance-reviews</span> page
+              redirects here — send three or four and they drop in with Review schema
+              attached.
+            </ComingSoon>
           </div>
         </Reveal>
       </section>

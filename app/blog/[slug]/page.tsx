@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Photo } from "@/components/media/Photo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { POSTS, getPost, formatDate } from "@/lib/blog";
+import { POSTS, getPost, formatDate, readingTime } from "@/lib/blog";
 import { getService } from "@/content/services";
 import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
@@ -69,33 +69,52 @@ export default async function BlogPost({
       />
 
       <article>
-        {/* Header */}
-        <header className="container-content pb-12 pt-40">
-          <Reveal>
-            <nav aria-label="Breadcrumb" className="mb-8">
-              <ol className="flex items-center gap-2 text-[0.85rem] text-slate-500">
-                <li><Link href="/" className="inline-link underline decoration-gold-600/40 underline-offset-4 hover:decoration-gold-600">Home</Link></li>
+        {/* Header. Centred to match the section fronts, but the body below
+            stays a single measured column — centred body copy is unreadable. */}
+        <header className="bs-masthead pb-14 pt-36 text-center lg:pt-44">
+          <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-10">
+            <nav aria-label="Breadcrumb" className="mb-9">
+              <ol className="bs-label flex items-center justify-center gap-2">
+                <li><Link href="/" className="inline-link hover:opacity-70">Home</Link></li>
                 <li aria-hidden>/</li>
-                <li><Link href="/blog" className="inline-link underline decoration-gold-600/40 underline-offset-4 hover:decoration-gold-600">News &amp; Resources</Link></li>
+                <li><Link href="/blog" className="inline-link hover:opacity-70">News &amp; Resources</Link></li>
               </ol>
             </nav>
 
-            <div className="flex items-center gap-3 text-[0.82rem]">
-              <span className="border border-paper-300 bg-paper-200 px-3 py-1 uppercase tracking-[0.14em] text-slate-700">{post.tag}</span>
-              <time dateTime={post.published} className="text-slate-500">
-                {formatDate(post.published)}
-              </time>
-            </div>
+            <div className="mx-auto max-w-4xl">
+              <div
+                className="bs-masthead-rule c-in mx-auto w-40"
+                style={{ ["--wd" as string]: "0.05s" }}
+                aria-hidden
+              />
 
-            <h1 className="mt-7 max-w-4xl text-h1 font-semibold text-slate-700">{post.title}</h1>
-            <p className="mt-7 max-w-2xl text-lead text-slate-700/85">{post.description}</p>
-          </Reveal>
+              <p className="c-in c-eyebrow mt-8" style={{ ["--wd" as string]: "0.14s" }}>
+                {post.tag}
+              </p>
+
+              <h1
+                className="bs-masthead-title c-in mt-7"
+                style={{ ["--wd" as string]: "0.24s" }}
+              >
+                {post.title}
+              </h1>
+
+              <p
+                className="bs-label c-in mt-9 flex flex-wrap items-center justify-center gap-x-3 gap-y-1"
+                style={{ ["--wd" as string]: "0.4s" }}
+              >
+                <time dateTime={post.published}>{formatDate(post.published)}</time>
+                <span aria-hidden style={{ color: "var(--c-hairline)" }}>|</span>
+                <span>{readingTime(post.words)} min read</span>
+              </p>
+            </div>
+          </div>
         </header>
 
         {/* Cover */}
         <Reveal>
           <div className="container-content">
-            <div className="relative aspect-21/9 overflow-hidden border border-paper-300">
+            <div className="relative mt-14 aspect-21/9 overflow-hidden border border-paper-300">
               <Photo
                 src={post.image}
                 alt={post.imageAlt}
@@ -111,7 +130,7 @@ export default async function BlogPost({
 
         {/* Body */}
         <div className="container-content">
-          <div className="mx-auto max-w-2xl py-20 text-lg">
+          <div className="bs-dropcap mx-auto max-w-2xl py-20 text-lg">
             <Content />
 
             <div className="rule-paper mt-16 pt-8">
@@ -136,7 +155,11 @@ export default async function BlogPost({
 
       {/* More */}
       <section className="container-content pb-20" aria-labelledby="more-heading">
-        <h2 id="more-heading" className="text-h3 font-semibold text-slate-700">Keep reading</h2>
+        <div className="flex items-baseline gap-4">
+          <span className="bs-numeral">&mdash;</span>
+          <h2 id="more-heading" className="c-display text-[clamp(1.5rem,2.6vw,2.1rem)]">Keep reading</h2>
+        </div>
+        <hr className="c-rule mt-6" />
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           {others.map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.08}>
