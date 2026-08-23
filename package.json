@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "images:generate": "node --env-file=.env.local scripts/generate-images.mts",
+    "images:prompts": "node scripts/generate-images.mts --dry-run"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

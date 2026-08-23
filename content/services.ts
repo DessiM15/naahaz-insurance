@@ -48,7 +48,7 @@ export const SERVICES: Service[] = [
     headline: "A roadmap, not just a {balance}",
     lede: "Retirement planning goes beyond just saving — it's about creating a roadmap that ensures long-term financial stability and the ability to enjoy life after work.",
     image: "/images/services/retirement-planning.jpg",
-    imageAlt: "A sailboat on open water at golden hour",
+    imageAlt: "A couple in their sixties at a kitchen table reviewing printed statements together",
     detailImage: "/images/detail/retirement-planning.jpg",
     detailAlt: "A couple walking hand in hand along a woodland path",
     intro:
@@ -111,7 +111,7 @@ export const SERVICES: Service[] = [
     headline: "Turning savings into a {paycheck}",
     lede: "Effective retirement income planning is essential for ensuring a secure and comfortable future through strategic asset and income management.",
     image: "/images/services/income-strategies.jpg",
-    imageAlt: "A person in a grey coat standing composed and at ease",
+    imageAlt: "A man working through printed statements and a laptop at a kitchen table",
     detailImage: "/images/detail/income-strategies.jpg",
     detailAlt: "Two people going through documents together at a table",
     intro:
@@ -168,7 +168,7 @@ export const SERVICES: Service[] = [
     headline: "Medicare, made {understandable}",
     lede: "Navigating Medicare can be challenging, but we're here to help you make informed decisions with confidence.",
     image: "/images/services/medicare.jpg",
-    imageAlt: "An older woman with a warm, composed expression",
+    imageAlt: "Grandparents on a porch with two grandchildren, all looking at a tablet together",
     detailImage: "/images/detail/medicare.jpg",
     detailAlt: "A doctor talking with a patient in a consulting room",
     intro:
@@ -232,7 +232,7 @@ export const SERVICES: Service[] = [
     headline: "What you leave {behind}",
     lede: "Coverage that replaces your income, clears your debts, and gives the people who depend on you room to grieve without also worrying about money.",
     image: "/images/services/life-insurance.jpg",
-    imageAlt: "A father and his daughters looking out over a view together",
+    imageAlt: "A family of four together on the sofa in a sunlit living room",
     detailImage: "/images/detail/life-insurance.jpg",
     detailAlt: "A parent holding a young child",
     intro:
@@ -292,7 +292,7 @@ export const SERVICES: Service[] = [
     headline: "The cost nobody {plans for}",
     lede: "Roughly seven in ten people over 65 will need some form of long-term care. Medicare doesn't cover it, and it is the single largest uninsured risk in most retirement plans.",
     image: "/images/services/long-term-care.jpg",
-    imageAlt: "An older person's hand holding a younger person's hand",
+    imageAlt: "An adult holding both of an elderly parent's hands",
     detailImage: "/images/detail/long-term-care.jpg",
     detailAlt: "A nurse smiling with an older patient at home",
     intro:
@@ -352,7 +352,7 @@ export const SERVICES: Service[] = [
     headline: "Coverage that fits your {actual life}",
     lede: "Individual and family health plans through the ACA marketplace — including the subsidies most people don't realise they qualify for.",
     image: "/images/services/health-insurance.jpg",
-    imageAlt: "A family together outdoors in an open field",
+    imageAlt: "A patient talking with her doctor in a clinic exam room",
     detailImage: "/images/detail/health-insurance.jpg",
     detailAlt: "A healthcare worker going through information with a patient",
     intro:
@@ -408,7 +408,7 @@ export const SERVICES: Service[] = [
     headline: "Protect what you {built}",
     lede: "Coverage for the business itself, the people who run it, and the ones who'd have to keep it going without you.",
     image: "/images/services/business-insurance.jpg",
-    imageAlt: "A small business owner behind the counter, greeting a customer",
+    imageAlt: "A shop owner working behind the counter of her hardware store",
     detailImage: "/images/detail/business-insurance.jpg",
     detailAlt: "Hand tools arranged on a workshop rack",
     intro:
@@ -464,7 +464,7 @@ export const SERVICES: Service[] = [
     headline: "The everyday {essentials}",
     lede: "Home, auto and umbrella coverage — reviewed as a set, because that's where the gaps and the discounts both hide.",
     image: "/images/services/property-casualty.jpg",
-    imageAlt: "A suburban home with a covered porch and mature trees",
+    imageAlt: "A two storey suburban house on a quiet street in early evening light",
     detailImage: "/images/detail/property-casualty.jpg",
     detailAlt: "A car parked on the driveway of a family home",
     intro:
@@ -520,7 +520,7 @@ export const SERVICES: Service[] = [
     headline: "Go, knowing you're {covered}",
     lede: "Trip cancellation, medical emergencies and evacuation coverage — including the international medical gap Medicare leaves wide open.",
     image: "/images/services/travel-insurance.jpg",
-    imageAlt: "Clouds seen through an aircraft window in daylight",
+    imageAlt: "A young couple at a coastal overlook on holiday, one adjusting a daypack",
     detailImage: "/images/detail/travel-insurance.jpg",
     detailAlt: "A passport and boarding pass resting on a travel bag",
     intro:

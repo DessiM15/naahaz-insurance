@@ -43,3 +43,6 @@ next-env.d.ts
 
 # Local lead capture from the console provider
 .leads.jsonl
+
+# local scratch (raw generations before recompression)
+/scratch
