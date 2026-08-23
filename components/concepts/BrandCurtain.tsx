@@ -39,9 +39,8 @@ import { CurtainScroll } from "./CurtainScroll";
  * script during parse, matching the pattern components/Loader.tsx already uses.
  */
 const BOOT = `(function(){try{
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches){
-    document.documentElement.setAttribute('data-brandcurtain','skip')
-  }
+  var skip = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.setAttribute('data-brandcurtain', skip ? 'skip' : 'play')
 }catch(e){}})()`;
 
 /** One half of the wordmark, centred on the seam and clipped to its side. */

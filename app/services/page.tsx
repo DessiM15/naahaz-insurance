@@ -4,8 +4,10 @@ import Link from "next/link";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { LeadSection } from "@/components/sections/LeadSection";
-import { Reveal, RevealLines } from "@/components/ui/Reveal";
+import { Reveal } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { PageMasthead } from "@/components/sections/PageMasthead";
+import { ComingSoon } from "@/components/sections/ComingSoon";
 import { BreadcrumbSchema } from "@/components/Schema";
 import { ADDITIONAL_LINES } from "@/content/services";
 import { clientCopy } from "@/content/copy";
@@ -22,33 +24,28 @@ export default function ServicesPage() {
     <div className="bs-paper">
       <BreadcrumbSchema trail={[{ name: "Home", href: "/" }, { name: "Services", href: "/services" }]} />
 
-      {/* Hub hero */}
-      <section className="grain relative flex min-h-[62svh] items-end overflow-hidden pb-20 pt-40">
+      <PageMasthead
+        eyebrow="Our Services"
+        title="Everything we do, in {one place}"
+        lede={clientCopy.mission}
+      />
+
+      {/* The photograph, below the masthead rather than under the title. */}
+      <div className="relative h-[38svh] min-h-64 overflow-hidden lg:h-[52svh]">
         <Photo
           src="/images/services/hub.jpg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-40"
+          className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0e1b2e] via-[#0e1b2e]/80 to-[#0e1b2e]/40" aria-hidden />
-        <div className="grain-layer" aria-hidden />
-
-        <div className="container-content relative">
-          <Reveal>
-            <Eyebrow>Our Services</Eyebrow>
-          </Reveal>
-          <RevealLines
-            as="h1"
-            className="mt-8 max-w-4xl text-h1 font-semibold text-ink-50"
-            lines={["Everything we do,", <>in <span className="accent-word">one place</span></>]}
-          />
-          <Reveal delay={0.2}>
-            <p className="mt-8 max-w-2xl text-lead text-ink-300">{clientCopy.mission}</p>
-          </Reveal>
-        </div>
-      </section>
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to top, rgba(14,27,46,0.55) 0%, rgba(14,27,46,0.12) 60%, rgba(14,27,46,0.3) 100%)" }}
+          aria-hidden
+        />
+      </div>
 
       <ServicesGrid heading={false} />
 
@@ -123,11 +120,13 @@ export default function ServicesPage() {
           frames — no third-party player script until someone hits play.
         */}
         <Reveal delay={0.12}>
-          <div className="mt-10 border border-dashed border-paper-300 bg-paper-200/60 p-12 text-center">
-            <p className="mx-auto max-w-lg text-slate-500">
-              Video grid is built and waiting on the embed URLs from the existing{" "}
-              <span className="text-slate-700">/videos</span> page.
-            </p>
+          <div className="mt-10">
+            <ComingSoon label="Built and waiting" title="Videos and guides" numeral="—">
+              The grid is built. It needs the embed URLs from the existing{" "}
+              <span style={{ color: "var(--c-ink)" }}>/videos</span> page, which currently
+              redirects here. Send them over and they drop in as lazy-loaded players with
+              poster frames — no third-party script until someone hits play.
+            </ComingSoon>
           </div>
         </Reveal>
       </section>

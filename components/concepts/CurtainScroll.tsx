@@ -43,15 +43,23 @@ export function CurtainScroll({
     const root = document.documentElement;
     if (root.getAttribute(skipAttr) === "skip") return;
 
+    const set = (p: number) => root.style.setProperty(cssVar, String(p));
+
     const track = document.querySelector<HTMLElement>(`[${trackAttr}]`);
-    if (!track) return;
+    if (!track) {
+      // Fail open. Everything that reads this variable — the panels, the seam,
+      // and now the site header on the homepage — defaults to the closed state
+      // so nothing flashes on first paint. That means a missing track would
+      // otherwise leave the curtain shut and the header invisible forever.
+      // Publishing 1 opens it instead.
+      set(1);
+      return;
+    }
 
     let raf = 0;
     let idle = 0;
     let auto: number | null = null;
     let scrolled = false;
-
-    const set = (p: number) => root.style.setProperty(cssVar, String(p));
 
     const fromScroll = () => {
       // Distance the sticky hero can travel inside its own track.

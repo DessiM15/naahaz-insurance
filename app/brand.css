@@ -168,3 +168,162 @@ body:has(.bs-paper) {
     animation: none;
   }
 }
+
+/* ==========================================================================
+   THE OPENER
+
+   Restored on 2026-08-22 at the client's request. Two bone panels part to
+   reveal the hero, and the NAAHAZ wordmark splits with them, NAA riding left
+   and HAZ riding right. Driven by scroll position rather than a timer: the
+   hero is pinned with position:sticky inside a taller track and the panels
+   open across that track's travel.
+
+   Everything below reads --bc, published on the root element by
+   components/concepts/CurtainScroll. 0 is closed, 1 is fully parted. One
+   variable, so the panels, the seam and the header cannot drift apart.
+   ========================================================================== */
+
+html[data-brandcurtain="skip"] .c-brandcurtain {
+  display: none;
+}
+
+/* The hero's scroll track. Collapses to a single viewport when the opener is
+   skipped, so a returning visitor never scrolls through dead space. */
+.c-bc-track {
+  height: 190svh;
+}
+html[data-brandcurtain="skip"] .c-bc-track {
+  height: 100svh;
+}
+
+.c-bc-l,
+.c-bc-r {
+  background: var(--c-ground);
+  will-change: transform;
+}
+.c-bc-l {
+  transform: translateX(calc(var(--bc, 0) * -101%));
+  /* A hairline of shadow on the inner edge, so the two panels read as one
+     sheet being parted rather than two rectangles sliding apart. */
+  box-shadow: 6px 0 18px -8px rgb(0 0 0 / 0.35);
+}
+.c-bc-r {
+  transform: translateX(calc(var(--bc, 0) * 101%));
+  box-shadow: -6px 0 18px -8px rgb(0 0 0 / 0.35);
+}
+
+.c-bc-seam {
+  background: var(--c-accent);
+  /* Gone by the time the panels are a third of the way open. */
+  opacity: clamp(0, calc(0.55 - var(--bc, 0) * 1.65), 0.55);
+}
+
+/* The header holds back while the panels are closed and arrives as they
+   clear, which is the beat the opener was built for: the name comes apart on
+   the seam and re-forms, whole, in the header.
+
+   The fallback is 0, matching the panels: everything reading --bc has to
+   agree at first paint, and the panels must start closed or they flash open
+   for a frame. Fail-safety lives in CurtainScroll instead, which publishes 1
+   if it cannot find the track — so a missing track opens the curtain and
+   shows the header rather than hiding both.
+
+   Scoped to the homepage via :has(.bs-home), so no other route inherits it. */
+html[data-brandcurtain="play"] body:has(.bs-home) #naahaz-content > header {
+  opacity: clamp(0, calc((var(--bc, 0) - 0.55) * 3.2), 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c-brandcurtain {
+    display: none;
+  }
+  html[data-brandcurtain="play"] body:has(.bs-home) #naahaz-content > header {
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   THE MASTHEAD
+
+   Every page other than the homepage opens on one of these: a centred title
+   between two rules, on bone, no photograph. It is the device a newspaper
+   uses for a section front, which is the right answer for a layout named
+   after one.
+
+   The type animates from CSS rather than from scroll position. That is
+   deliberate and load bearing — a scroll-triggered reveal on an element that
+   is already above the fold left the page's h1 masked and invisible. CSS
+   keyframes start on first paint and cannot fail to fire.
+   ========================================================================== */
+
+[data-brand] .bs-masthead {
+  background: var(--c-ground);
+  border-bottom: 1px solid var(--c-hairline);
+}
+
+[data-brand] .bs-masthead-rule {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--c-accent) 22%,
+    var(--c-accent) 78%,
+    transparent
+  );
+}
+
+/* Fluid, and deliberately larger than the old text-h1. The page title is the
+   thing the client said he could not see. */
+[data-brand] .bs-masthead-title {
+  font-family: var(--c-font-display);
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  font-size: clamp(2.6rem, 6.4vw, 5.6rem);
+  text-wrap: balance;
+}
+
+/* ==========================================================================
+   Editorial furniture
+   ========================================================================== */
+
+/* Drop cap on the first paragraph of an article. Scoped with > so it can only
+   ever hit a top-level paragraph, never the first line of a pull quote or a
+   list item further down. */
+[data-brand] .bs-dropcap > p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--c-font-display);
+  font-size: 3.9em;
+  line-height: 0.82;
+  padding: 0.06em 0.1em 0 0;
+  color: var(--c-accent-deep);
+}
+
+/* Pull quote. A rule and a size change, no quotation marks and no box. */
+[data-brand] .bs-pullquote {
+  font-family: var(--c-font-display);
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+  line-height: 1.28;
+  letter-spacing: -0.015em;
+  border-left: 2px solid var(--c-accent);
+  padding-left: 1.4rem;
+  color: var(--c-ink);
+}
+
+/* Small-caps label, for date lines and running heads. */
+[data-brand] .bs-label {
+  font-family: var(--c-font-text);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-ink-soft);
+}
+
+/* A section number, set in the display face and held back. */
+[data-brand] .bs-numeral {
+  font-family: var(--c-font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  color: var(--c-accent-deep);
+}

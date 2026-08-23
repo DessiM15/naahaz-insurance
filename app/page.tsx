@@ -4,6 +4,7 @@ import { Reveal, RevealLines } from "@/components/ui/Reveal";
 import { HeroVideo } from "@/components/concepts/HeroVideo";
 import { WordNodes } from "@/components/concepts/Words";
 import { Marquee } from "@/components/concepts/Curtain";
+import { BrandCurtain } from "@/components/concepts/BrandCurtain";
 import { ServiceIndex } from "@/components/concepts/ServiceIndex";
 import { FaqList } from "@/components/sections/FaqList";
 import { LeadSection } from "@/components/sections/LeadSection";
@@ -21,8 +22,10 @@ const band = services.map((s) => s.name);
  * Differences from app/concepts/broadsheet, which stays frozen as the record
  * of what was pitched:
  *
- *   - the scroll-driven brand curtain is gone, so the hero is one viewport
- *     rather than a sticky pin inside a 190svh track
+ *   - the scroll-driven brand curtain is BACK, at the client's request on
+ *     2026-08-22. The hero is pinned inside a 190svh track again and the
+ *     panels part across that travel. .bs-home is what scopes the header's
+ *     hold-back rule in app/brand.css to this page and no other.
  *   - the concept's own header and footer are gone; the real site chrome in
  *     app/layout renders around this page, which is where the mobile menu,
  *     the booking modal and the legal disclaimers live
@@ -42,13 +45,15 @@ const band = services.map((s) => s.name);
  */
 export default function HomePage() {
   return (
-    <div className="bs-paper">
+    <div className="bs-paper bs-home">
 
       {/* ═══════════════════════════════════════════════ 1. HERO ── HIGH ── */}
-      {/* One viewport, no scroll track. The concept pinned this inside a
-          190svh track so the brand curtain had travel to part across; without
-          the opener that extra height is just dead space above the fold. */}
-      <section className="relative isolate flex h-svh flex-col justify-end overflow-hidden pb-[4.5rem]">
+      {/* Pinned inside a taller track. The extra height is the travel the
+          panels part across, which is what makes the opener scroll driven
+          rather than timed. It collapses to one viewport under reduced
+          motion, when the opener is skipped entirely. */}
+      <div data-bc-track className="c-bc-track relative">
+        <section className="sticky top-0 isolate flex h-svh flex-col justify-end overflow-hidden pb-[4.5rem]">
         <HeroVideo
           src="/video/hero-generations.mp4"
           poster="/video/poster-generations.jpg"
@@ -126,7 +131,9 @@ export default function HomePage() {
           />
         </div>
 
-      </section>
+        <BrandCurtain />
+        </section>
+      </div>
 
       {/* ════════════════════════════════════════════ 2. PROMISE ── LOW ── */}
       <section className="mx-auto max-w-[1440px] px-6 py-28 lg:px-10 lg:py-36" id="about">

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { LogoLink } from "@/components/logo/Logo";
@@ -47,9 +48,18 @@ export function SiteHeader() {
     };
   }, [open]);
 
-  /* Over the hero the ink is light, because everything behind it is either
-     footage under a navy scrim or a navy page. On the paper ground it flips. */
-  const onPaper = scrolled;
+  /* Which routes are dark behind the header at scroll zero.
+     
+     This used to assume every page was navy, which was true when the header
+     was written and false the moment the inner pages went bone: the header
+     kept painting near-white #f4efe4 ink onto a #f7f4ed ground, so the logo,
+     the nav and the phone number were all invisible until you scrolled.
+     
+     Only the homepage's film and the booking page are dark now. Everywhere
+     else opens on a masthead, so the ink is dark from the first pixel. */
+  const pathname = usePathname();
+  const darkBehind = pathname === "/" || pathname === "/book";
+  const onPaper = scrolled || !darkBehind;
 
   return (
     <>

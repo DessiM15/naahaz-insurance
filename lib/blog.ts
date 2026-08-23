@@ -20,6 +20,9 @@ export type Post = {
   tag: string;
   /** Related service page. */
   service: string;
+  /** Word count of the .mdx body, tags stripped. Feeds the reading time.
+      Recount when the post is edited: `sed -e 's/<[^>]*>//g' file.mdx | wc -w`. */
+  words: number;
   load: () => Promise<{ default: React.ComponentType }>;
 };
 
@@ -34,6 +37,7 @@ export const POSTS: Post[] = [
     imageAlt: "An older woman smiling warmly",
     tag: "Medicare",
     service: "medicare",
+    words: 555,
     load: () => import("@/content/blog/9-important-medicare-mistakes-to-avoid.mdx"),
   },
   {
@@ -46,6 +50,7 @@ export const POSTS: Post[] = [
     imageAlt: "A business owner in an apron checking their phone",
     tag: "Disability Income",
     service: "income-strategies",
+    words: 450,
     load: () => import("@/content/blog/is-your-income-protected-if-you-become-disabled.mdx"),
   },
   {
@@ -58,6 +63,7 @@ export const POSTS: Post[] = [
     imageAlt: "A detail of a glass building facade",
     tag: "Retirement Planning",
     service: "retirement-planning",
+    words: 522,
     load: () => import("@/content/blog/creditor-protection-in-retirement-planning.mdx"),
   },
 ];
@@ -77,3 +83,21 @@ export function formatDate(iso: string) {
 
 /** Rough reading time from the post's own word count, set at authoring time. */
 export const READING_WORDS_PER_MINUTE = 220;
+
+export function readingTime(words: number) {
+  return Math.max(1, Math.round(words / READING_WORDS_PER_MINUTE));
+}
+
+/** Every tag in use, most-used first. Drives the topic filter on /blog. */
+export function allTags() {
+  const counts = new Map<string, number>();
+  for (const p of POSTS) counts.set(p.tag, (counts.get(p.tag) ?? 0) + 1);
+  return [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([tag]) => tag);
+}
+
+/** The shape the client-side archive needs — everything except the loader. */
+export type PostCard = Omit<Post, "load">;
+
+export function toCard({ load: _load, ...rest }: Post): PostCard {
+  return rest;
+}

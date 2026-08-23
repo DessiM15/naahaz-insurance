@@ -79,6 +79,17 @@ export function Reveal({
  * `as` matters: when this renders the main headline of a page it must be an
  * h1, not an h2. Defaulting it to h2 once left several pages with no h1 at
  * all, which search engines notice.
+ *
+ * It animates on mount rather than on scroll, and that is a bug fix rather
+ * than a preference. Driven by whileInView, a headline sitting above the fold
+ * could be left parked at translateY(105%) inside its own overflow-hidden
+ * mask — present in the HTML, occupying its full height, and completely
+ * invisible. The blog index shipped for a day with an h1 nobody could see.
+ *
+ * A mask that fails closed hides content, so it must not depend on an
+ * observer firing. The cost is that a heading further down the page has
+ * usually finished animating before you reach it, which is a far cheaper
+ * failure than an invisible headline.
  */
 export function RevealLines({
   lines,
@@ -99,9 +110,8 @@ export function RevealLines({
         <span key={i} className="block overflow-hidden">
           <motion.span
             className="block"
-            initial={{ y: "105%", opacity: 1 }}
-            whileInView={{ y: "0%", opacity: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
+            initial={{ y: "105%" }}
+            animate={{ y: "0%" }}
             transition={
               still
                 ? { duration: 0 }
